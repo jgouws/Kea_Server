@@ -15,3 +15,5 @@ The Kakago Database Web Application manages the database that is made up of user
 ##How is this made?
 
 This is made with [NodeJS](https://nodejs.org),  but its foundation is based on mjhea0's [**Testing Node and Express**](https://github.com/mjhea0/express-testing-mocha-knex "GitHub - mjhea0/express-testing-mocha-knex: testing an express app") Project.
+
+On top of that, git hooks have been added to run tests at every git commit.
