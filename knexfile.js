@@ -1,4 +1,4 @@
-const databaseName = 'express_tdd';
+const databaseName = 'kakago';
 
 module.exports = {
   development: {
@@ -13,7 +13,7 @@ module.exports = {
   },
   test: {
     client: 'postgresql',
-    connection: `postgres://localhost:5432/${databaseName}_testing`,
+    connection: `postgres://localhost:5432/${databaseName}_test`,
     migrations: {
       directory: __dirname + '/src/server/db/migrations'
     },
