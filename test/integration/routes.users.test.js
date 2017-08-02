@@ -18,7 +18,7 @@ describe('routes : users', () => {
         knex.seed.run()
         .then(() => {
           done();
-        })
+        });
       });
     });
   });
