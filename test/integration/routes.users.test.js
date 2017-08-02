@@ -9,7 +9,6 @@ const server = require('../../src/server/app');
 const knex = require('../../src/server/db/knex');
 
 describe('routes : users', () => {
-
   beforeEach((done) => {
     knex.migrate.rollback()
     .then(() => {
