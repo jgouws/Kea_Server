@@ -46,10 +46,12 @@ router.get('/:id', validate.validateUserResources, (req, res, next) => {
 router.put('/:id', validate.validateUserResources, (req, res, next) => {
   const userID = parseInt(req.params.id);
   const updatedUsername = req.body.username;
+  const updatedPassword = req.body.password;
   const updatedEmail = req.body.email;
   knex('users')
   .update({
     username: updatedUsername,
+    password: updatedPassword,
     email: updatedEmail
   })
   .where({
@@ -94,10 +96,12 @@ router.delete('/:id', validate.validateUserResources, (req, res, next) => {
 
 router.post('/', validate.validateUserResources, (req, res, next) => {
   const newUsername = req.body.username;
+  const newPassword = req.body.password;
   const newEmail = req.body.email;
   knex('users')
   .insert({
     username: newUsername,
+    password: newPassword,
     email: newEmail
   })
   .returning('*')

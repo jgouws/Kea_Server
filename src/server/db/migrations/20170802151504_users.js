@@ -3,6 +3,8 @@ exports.up = (knex, Promise) => {
     table.increments();
     table.string('username').unique().notNullable();
     table.string('email').unique().notNullable();
+    table.string('password').notNullable();
+    table.boolean('admin').notNullable().defaultTo(false);
     table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };

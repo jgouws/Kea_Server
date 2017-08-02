@@ -109,6 +109,7 @@ describe('routes : users', () => {
       .post('/api/v1/users')
       .send({
         username: 'ryan',
+        password: 'rassword',
         email: 'ryan@ryan.com'
       })
       .end((err, res) => {
