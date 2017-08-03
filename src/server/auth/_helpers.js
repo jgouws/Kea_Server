@@ -22,8 +22,21 @@ function loginRequired(req, res, next) {
   return next();
 }
 
+function adminRequired(req, res, next) {
+  if (!req.user) res.status(401).json({status: 'Please log in'});
+  return knex('users').where({username: req.user.username}).first()
+  .then((user) => {
+    if (!user.admin) res.status(401).json({status: 'You are not authorized'});
+    return next();
+  })
+  .catch((err) => {
+    res.status(500).json({status: 'Something bad happened'});
+  });
+}
+
 module.exports = {
   comparePass,
   createUser,
-  loginRequired
+  loginRequired,
+  adminRequired
 };

@@ -12,5 +12,17 @@ exports.seed = (knex, Promise) => {
         password: hash
       })
     );
+  })
+  .then(() => {
+    const salt = bcrypt.genSaltSync();
+    const hash = bcrypt.hashSync('passwordtwo', salt);
+    return Promise.join(
+      knex('users').insert({
+        username: 'kelly',
+        email: 'kelly@mate.org',
+        password: hash,
+        admin: true
+      })
+    );
   });
 };
