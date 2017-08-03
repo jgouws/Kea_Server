@@ -14,18 +14,21 @@ describe('controllers : users', () => {
         id: 1,
         username: 'michael',
         email: 'michael@mherman.org',
+        password: 'password',
         created_at: '2016-09-10T16:44:28.015Z'
       },
       {
         id: 2,
         username: 'mike',
-        email: 'mike@mherman.org',
+        email: 'michael@mherman.org',
+        password: 'password',
         created_at: '2015-09-10T16:44:28.015Z'
       },
       {
         id: 3,
         username: 'mike',
-        email: 'mike@mherman.org',
+        email: 'michael@mherman.org',
+        password: 'password',
         created_at: '2014-09-10T16:44:28.015Z'
       }
     ];
