@@ -10,7 +10,7 @@
   const session = require('express-session');
   const flash = require('connect-flash');
   const morgan = require('morgan');
-  // const nunjucks = require('nunjucks');
+  const sassMiddleware = require('node-sass-middleware');
   const passport = require('passport');
 
   // *** load environment variables *** //
@@ -30,6 +30,12 @@
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(expressValidator());
+    app.use(sassMiddleware({
+      src: path.join(__dirname, '..', '..', 'client'),
+      dest: path.join(__dirname, '..', '..', 'client'),
+      indentedSyntax: true, // true = .sass and false = .scss
+      sourceMap: true
+    }));
     // uncomment if using express-session
     app.use(session({
       secret: process.env.SECRET_KEY,
