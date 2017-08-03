@@ -16,7 +16,10 @@ router.post('/register', (req, res, next)  => {
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    if (err) { handleResponse(res, 500, 'error'); }
+    if (err) {
+      console.log(err.stack);
+      handleResponse(res, 500, 'error');
+    }
     if (!user) { handleResponse(res, 404, 'User not found'); }
     if (user) {
       req.logIn(user, function (err) {
@@ -25,6 +28,11 @@ router.post('/login', (req, res, next) => {
       });
     }
   })(req, res, next);
+});
+
+router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
+  req.logout();
+  handleResponse(res, 200, 'success');
 });
 
 function handleResponse(res, code, statusMsg) {

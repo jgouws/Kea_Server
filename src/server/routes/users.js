@@ -8,6 +8,7 @@ const userQueries = require('../db/queries.users');
 
 router.get('/', (req, res, next) => {
   userQueries.getAllUsers((err, users) => {
+    console.log('UUUCEE');
     if (err) {
       res.status(500).json({
         status: 'error',

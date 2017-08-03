@@ -3,30 +3,24 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
-chai.use(chaiHttp);
+const passportStub = require('passport-stub');
 
 const server = require('../../src/server/app');
 const knex = require('../../src/server/db/knex');
 
+chai.use(chaiHttp);
+passportStub.install(server);
+
 describe('routes : users', () => {
-  beforeEach((done) => {
-    knex.migrate.rollback()
-    .then(() => {
-      knex.migrate.latest()
-      .then(() => {
-        knex.seed.run()
-        .then(() => {
-          done();
-        });
-      });
-    });
+  beforeEach(() => {
+    return knex.migrate.rollback()
+    .then(() => { return knex.migrate.latest(); })
+    .then(() => { return knex.seed.run(); });
   });
 
-  afterEach((done) => {
-    knex.migrate.rollback()
-    .then(() => {
-      done();
-    });
+  afterEach(() => {
+    passportStub.logout();
+    return knex.migrate.rollback();
   });
 
   describe('GET /api/v1/users', () => {
@@ -34,22 +28,13 @@ describe('routes : users', () => {
       chai.request(server)
       .get('/api/v1/users')
       .end((err, res) => {
-        // there should be no errors
         should.not.exist(err);
-        // there should be a 200 status code
         res.status.should.equal(200);
-        // the response should be JSON
         res.type.should.equal('application/json');
-        // the JSON response body should have a
-        // key-value pair of {"status": "success"}
         res.body.status.should.eql('success');
-        // the JSON response body should have a
-        // key-value pair of {"data": [2 user objects]}
-        res.body.data.length.should.eql(2);
-        // the first object in the data array should
-        // have the right keys
+        res.body.data.length.should.eql(1);
         res.body.data[0].should.include.keys(
-          'id', 'username', 'email', 'created_at'
+          'id', 'username', 'email', 'password', 'admin', 'created_at'
         );
         done();
       });
