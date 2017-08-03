@@ -1,17 +1,17 @@
-#KakaGo Database Web Application
+# KakaGo Database Web Application
 
 The Kakago Database Web Application manages the database that is made up of user bird observation submissions from the KakaGo mobile app.
 
-##How to run this project
+## How to run this project
 
-###Prerequisite tools
+### Prerequisite tools
 
 - [Postgres](http://postgresguide.com/setup/install.html)
 - [NodeJS (and npm)](https://nodejs.org/en/download/)
 - `npm install --save-dev gulp-install` (workflow automator)
 - `npm install --save-dev knex` (sql query builder)
 
-###Running the app
+### Running the app
 
 1. Clone
 1. `npm install`
@@ -21,7 +21,7 @@ The Kakago Database Web Application manages the database that is made up of user
 1. `gulp`
 1. `npm test`
 
-##How is this made?
+## How is this made?
 
 This is made with [NodeJS](https://nodejs.org),  but its foundation is based on mjhea0's [**Testing Node and Express**](https://github.com/mjhea0/express-testing-mocha-knex "GitHub - mjhea0/express-testing-mocha-knex: testing an express app") Project. The [tutorial](http://mherman.org/blog/2016/09/12/testing-node-and-express/#.WYCNsXeB3xs) on making this project will be helpful when adding tests.
 
