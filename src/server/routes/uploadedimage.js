@@ -12,7 +12,7 @@ router.post('/', function (req, res, next) {
   var form = new formidable.IncomingForm();
   form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
-    console.log("saved " + files.filetoupload.path);
+    console.log('saved ' + files.filetoupload.path);
     //var newpath = '/Users/nigelmunro/desktop/nodefileupload' + files.filetoupload.name;
     var newpath = './pictures/' + files.filetoupload.name;
 
