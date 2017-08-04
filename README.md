@@ -8,16 +8,21 @@ The Kakago Database Web Application manages the database that is made up of user
 
 - [Postgres](http://postgresguide.com/setup/install.html)
 - [NodeJS (and npm)](https://nodejs.org/en/download/)
-- `npm install --save-dev gulp-install` (workflow automator)
-- `npm install --save-dev knex` (sql query builder)
+- `npm install -g gulp-install` (workflow automator)
+- `npm install -g knex` (sql query builder)
 
 ### Running the app
 
 1. Clone
 1. `npm install`
+1. `npm install bcryptjs`
+1. `npm install node-sass-middleware`
+1. `npm install pug`
+1. `npm install passport`
+1. `npm install passport-stub`
 1. Create two local Postgres databases - `kakago` and `kakago_test`
 1. `knex migrate:latest --env development`
-1. `knex seed:run --env development` (
+1. `knex seed:run --env development`
 1. `gulp`
 1. `npm test`
 
