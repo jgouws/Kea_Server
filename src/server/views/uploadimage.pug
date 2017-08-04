@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p  #{title}
+
+  form(action='uploadedimage', method='post', enctype='multipart/form-data')
+    input(type='file', name='filetoupload')
+    br
+    input(type='submit')
