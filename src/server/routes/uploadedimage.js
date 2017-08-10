@@ -13,7 +13,6 @@ router.post('/', function (req, res, next) {
   form.parse(req, function (err, fields, files) {
     var oldpath = files.filetoupload.path;
     console.log('saved ' + files.filetoupload.path);
-    //var newpath = '/Users/nigelmunro/desktop/nodefileupload' + files.filetoupload.name;
     var newpath = './pictures/' + files.filetoupload.name;
 
     fs.rename(oldpath, newpath, function (err) {
