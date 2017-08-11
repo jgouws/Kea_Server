@@ -1,5 +1,6 @@
-(function () {
+console.log('sanity check!');
 
-  console.log('sanity check!');
-
-})();
+function setAttribute() {
+  //this.value = 'no';
+  //console.log('checkbox');
+}

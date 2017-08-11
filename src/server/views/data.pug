@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  //Possibly move this to main.js
+  
+  .datapage_format
+    h1= title
+    p  This is the page to export data
+    p Please choose which attributes you want to export
+    
+    //TODO Change this to make button labels based on table headers
+    //Figure out how to get values of check boxes
+    -var attr1 = false;
+    -var attr2 = false;
+    -var attr3 = false;
+    -var attr4 = false;
+    -var attr5 = false;
+    -var attr6 = false;
+    -var attr7 = false;
+    
+    div.checkbox-inline
+      input.checkbox-input#attr1(type='checkbox',value='yes')
+      label attr1
+    div.checkbox-inline
+      input.checkbox-input#attr2(type='checkbox',value='Yes')
+      label attr2
+    div.checkbox-inline
+      input.checkbox-input#attr3(type='checkbox',value='Yes')
+      label attr3
+    div.checkbox-inline
+      input.checkbox-input#attr4(type='checkbox',value='Yes')
+      label attr4
+    div.checkbox-inline
+      input.checkbox-input#attr5(type='checkbox',value='Yes')
+      label attr5
+    div.checkbox-inline
+      input.checkbox-input#attr6(type='checkbox',value='Yes')
+      label attr6
+    div.checkbox-inline
+      input.checkbox-input#attr7(type='checkbox',value='Yes')
+      label attr7
+    br
+    button#Black(type ='fetch data' style = 'width:100px; height:25px;')
+      label Fetch Data
+    

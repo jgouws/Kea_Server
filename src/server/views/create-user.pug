@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p  #{title}
+  
+  form#register-form
+    input(type="text" name="username")
+    input(type="email" name="email")
+    input(type="password" name="password")
+    

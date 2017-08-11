@@ -5,8 +5,32 @@ const indexController = require('../controllers/index');
 
 router.get('/', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
+  renderObject.title = 'Kaka Go';
   res.render('index', renderObject);
+});
+
+router.get('/about', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Kaka Go';
+  res.render('index', renderObject);
+});
+
+router.get('/data', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Kaka Go Data';
+  res.render('data', renderObject);
+});
+
+router.get('/gallery', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Kaka Go Gallery';
+  res.render('gallery', renderObject);
+});
+
+router.get('/map', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Kaka Go Map';
+  res.render('map', renderObject);
 });
 
 module.exports = router;

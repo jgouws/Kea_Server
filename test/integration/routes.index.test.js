@@ -25,7 +25,7 @@ describe('routes : index', () => {
         res.redirects.length.should.equal(0);
         res.status.should.equal(200);
         res.type.should.equal('text/html');
-        res.text.should.contain('<h1>Welcome to Express!</h1>');
+        res.text.should.contain('<h1>Kaka Go</h1>');
         done();
       });
     });
