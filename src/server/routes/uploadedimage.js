@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
       var oldpath = files.filetoupload.path;
       console.log('saved ' + files.filetoupload.path);
       //var newpath = '/Users/nigelmunro/desktop/nodefileupload' + files.filetoupload.name;
-      var newpath = './pictures/' + files.filetoupload.name;
+      var newpath = './src/client/uploaded/' + files.filetoupload.name;
 
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
