@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 = title
+  p Query database #{title}
+  - for (var i=0; i<=list.length; i++) {
+  li= list[i]
+  - }
+
+  table
+    tr
+      th id
+      th species
+      th descriptiog
+    each row, i in rows
+      tr
+      each col, i in row
+        td= col
