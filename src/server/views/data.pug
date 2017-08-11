@@ -1,11 +1,16 @@
 extends layout
 
 block content
+  
   //Possibly move this to main.js
   
+  //- - var something = function() {
+  //- -   console.log('something');
+  //- - }
+    
   .datapage_format
     h1= title
-    p  This is the page to export data
+    p This is the page to export data
     p Please choose which attributes you want to export
     
     //TODO Change this to make button labels based on table headers
@@ -18,8 +23,15 @@ block content
     -var attr6 = false;
     -var attr7 = false;
     
+    // for(var i = 0; i < 10; i++){
+    //    console.log(i)
+    // }
+    
+    
+    
+    
     div.checkbox-inline
-      input.checkbox-input#attr1(type='checkbox',value='yes')
+      input.checkbox-input#attr1(type='checkbox', value='yes', onclick='setAttribute')
       label attr1
     div.checkbox-inline
       input.checkbox-input#attr2(type='checkbox',value='Yes')
@@ -40,6 +52,7 @@ block content
       input.checkbox-input#attr7(type='checkbox',value='Yes')
       label attr7
     br
-    button#Black(type ='fetch data' style = 'width:100px; height:25px;')
-      label Fetch Data
+    button(onclick='something()') Fetch Data
+      // style = 'width:100px; height:25px;'
+      //label Fetch Data
     
