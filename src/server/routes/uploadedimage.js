@@ -2,6 +2,7 @@ const express = require('express');
 const formidable = require('formidable');
 const fs = require('fs');
 const router = express.Router();
+const knex = require('../../../src/server/db/knex');
 
 const indexController = require('../controllers/uploadedimage');
 
@@ -28,13 +29,26 @@ router.post('/', function (req, res, next) {
       var oldpath = files.filetoupload.path;
       console.log('saved ' + files.filetoupload.path);
       //var newpath = '/Users/nigelmunro/desktop/nodefileupload' + files.filetoupload.name;
-      var newpath = './src/client/uploaded/' + files.filetoupload.name;
+      var filename = files.filetoupload.name;
+      var newpath = './src/client/uploaded/' + filename;
+      
 
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        res.write('File uploaded and moved!');
-        res.end();
 
+        console.log('Adding test');
+        knex('observations').insert({
+          user_id: 1,
+          image_url: filename + '1',
+          species: 'testing1234',
+          description: 'This is a bird',
+          approved: true,
+          latitude: '41.2865',
+          longitude: '174.7762'
+        }).then(function(result){
+          res.write('File uploaded and moved!');
+          res.end();
+        });
        //res.render('uploadedimage', renderObject);
 
       });
