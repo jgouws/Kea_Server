@@ -49,7 +49,9 @@ router.post('/', function(req, res, next) {
           console.log(newpath);
 
           // set UID to new value
-          knex('uid').where('id', '=', '1').update({value: uid + 1}).then();
+          knex('uid').where('id', '=', '1').update({
+            value: uid + 1
+          }).then();
 
           fs.rename(oldpath, newpath, function(err) {
             if (err) throw err;
