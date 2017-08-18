@@ -36,19 +36,27 @@ router.post('/', function (req, res, next) {
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
 
-        console.log('Adding test');
-        knex('observations').insert({
-          user_id: 1,
-          image_url: filename + '1',
-          species: 'testing1234',
-          description: 'This is a bird',
-          approved: true,
-          latitude: '41.2865',
-          longitude: '174.7762'
-        }).then(function(result){
-          res.write('File uploaded and moved!');
-          res.end();
-        });
+        // get UID from uid table to append to filename
+        knex('uid').select('id').then(function(result){
+          var uid = result[0].id;
+
+          knex('observations').insert({
+            user_id: 1,
+            image_url: uid + filename,
+            species: 'testing1234',
+            description: 'This is a bird',
+            approved: true,
+            latitude: '41.2865',
+            longitude: '174.7762'
+          }).then(function(result){
+            res.write('File uploaded and moved!');
+            res.end();
+          }); 
+        }
+        );
+
+
+        
        //res.render('uploadedimage', renderObject);
 
       });
