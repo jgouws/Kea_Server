@@ -17,14 +17,13 @@ router.post('/', function (req, res, next) {
       'image/png',
       'image/jpeg',
       'image/gif'
-    ]
+    ];
     var found = allowedTypes.indexOf(filetype);
-    if(found < 0){
+    if (found < 0) {
       // invalid file
       res.write('Invlaid file type');
       res.end();
-    }
-    else{
+    } else {
       var oldpath = files.filetoupload.path;
       console.log('saved ' + files.filetoupload.path);
       //var newpath = '/Users/nigelmunro/desktop/nodefileupload' + files.filetoupload.name;
@@ -34,9 +33,6 @@ router.post('/', function (req, res, next) {
         if (err) throw err;
         res.write('File uploaded and moved!');
         res.end();
-
-       //res.render('uploadedimage', renderObject);
-
       });
     }
   });
