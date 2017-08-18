@@ -33,4 +33,10 @@ router.get('/map', function (req, res, next) {
   res.render('map', renderObject);
 });
 
+router.get('/login', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Please Log-in to continue';
+  res.render('login', renderObject);
+});
+
 module.exports = router;
