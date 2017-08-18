@@ -36,14 +36,26 @@ router.get('/map', function (req, res, next) {
   res.render('map', renderObject);
 });
 
-router.get('/login', function (req, res, next) {
+router.get('/data', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Please Log-in to continue';
-  res.render('login', renderObject);
+  res.render('data', renderObject);
+});
+
+router.get('/projects', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Please Log-in to continue';
+  res.render('projects', renderObject);
 });
 
 router.get('/register', (req, res, next)  => {
   res.render('register', {title: 'Register'});
+});
+
+router.get('/login', function (req, res, next) {
+  const renderObject = {};
+  renderObject.title = 'Please Log-in to continue';
+  res.render('login', renderObject);
 });
 
 router.post('/login', (req, res, next) => {
@@ -57,7 +69,6 @@ router.post('/login', (req, res, next) => {
       req.logIn(user, function (err) {
         if (err) { handleResponse(res, 500, 'error'); }
         handleResponse(res, 200, 'success');
-        res.redirect('/');
       });
     }
   })(req, res, next);
