@@ -1,20 +1,25 @@
 extends layout
 
+//This page is to be used for the export of raw data, filterable
+//by attribute at the whim of the user
+
 block content
-  
-  //Possibly move this to main.js
-  
+
+  //This function will be called when checking each box to change
+  //The corresponding variable
+
   //- - var something = function() {
   //- -   console.log('something');
   //- - }
-    
+
   .datapage_format
     h1= title
     p This is the page to export data
     p Please choose which attributes you want to export
-    
-    //TODO Change this to make button labels based on table headers
-    //Figure out how to get values of check boxes
+
+    //These variables represent a boolean value for each checkbox.
+    //They are initially false, though when checked by the user they
+    //Will become true. This enables access to the checkboxes state.
     -var attr1 = false;
     -var attr2 = false;
     -var attr3 = false;
@@ -22,14 +27,12 @@ block content
     -var attr5 = false;
     -var attr6 = false;
     -var attr7 = false;
-    
-    // for(var i = 0; i < 10; i++){
-    //    console.log(i)
-    // }
-    
-    
-    
-    
+
+
+
+    //The following checkboxes are to be used to filter attributes when exporting
+    //data. This will enable the researcher to filter results and only choose
+    //the ones they actually want.
     div.checkbox-inline
       input.checkbox-input#attr1(type='checkbox', value='yes', onclick='setAttribute')
       label attr1
@@ -52,7 +55,6 @@ block content
       input.checkbox-input#attr7(type='checkbox',value='Yes')
       label attr7
     br
+
+    //This button will generate the SQL query based on which boxes were selected
     button(onclick='something()') Fetch Data
-      // style = 'width:100px; height:25px;'
-      //label Fetch Data
-    
