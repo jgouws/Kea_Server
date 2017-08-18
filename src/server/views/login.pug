@@ -1,0 +1,9 @@
+extends layout
+//The main login page for the website
+block content
+  h1= title
+  p  #{title}
+
+  form#register-form
+    input(type="text" name="username")
+    input(type="password" name="password")
