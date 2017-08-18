@@ -33,8 +33,8 @@ router.post('/', function(req, res, next) {
       filename = filename.replace('/', '');
       console.log(filename);
 
-      knex('uid').select('id').then(function(result) {
-        uid = result[0].id;
+      knex('uid').select('value').then(function(result) {
+        uid = result[0].value;
 
         knex('observations').insert({
           user_id: 1,
@@ -47,6 +47,10 @@ router.post('/', function(req, res, next) {
         }).then(function(result) {
           var newpath = './src/client/uploaded/' + uid + filename;
           console.log(newpath);
+
+          // set UID to new value
+          knex('uid').where('id', '=', '1').update({value: uid + 1}).then();
+
           fs.rename(oldpath, newpath, function(err) {
             if (err) throw err;
             res.write('File uploaded and moved!');
