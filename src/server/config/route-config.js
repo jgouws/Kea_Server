@@ -8,14 +8,13 @@
     const routes = require('../routes/index');
     const usersRoutes = require('../routes/users');
     const userRoutes = require('../routes/user');
-    const authRoutes = require('../routes/auth');
+    // const authRoutes = require('../routes/auth');
     const uploadimageRoutes = require('../routes/uploadimage');
     const uploadedimageRoutes = require('../routes/uploadedimage');
 
     // *** register routes *** //
     app.use('/', routes);
     app.use('/api/v1/users', usersRoutes);
-    app.use('/auth', authRoutes);
     app.use('/', userRoutes);
     app.use('/uploadimage', uploadimageRoutes);
     app.use('/uploadedimage', uploadedimageRoutes);
