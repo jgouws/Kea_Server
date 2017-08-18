@@ -57,6 +57,7 @@ router.post('/login', (req, res, next) => {
       req.logIn(user, function (err) {
         if (err) { handleResponse(res, 500, 'error'); }
         handleResponse(res, 200, 'success');
+        res.redirect('/');
       });
     }
   })(req, res, next);
