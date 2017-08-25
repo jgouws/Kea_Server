@@ -11,25 +11,25 @@ html(lang='en')
     link(rel='stylesheet', type='text/css', href='//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/main.css')
   body 
-    section#header.header-one
+    header#header
       .container
         .row
-          .col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8
-            .header-thumb
+          .col-md-12
+            .logo-container
               img(src='/images/kakago-logo.png', class='logo')
               //h1.wow.fadeIn(data-wow-delay='1.6s') KaKa Go
               //h3.wow.fadeInUp(data-wow-delay='1.9s') Six HTML pages include
-    nav.navbar
-      ul
-        li
-          a(href="/gallery") Gallery
-        li
-          a(href='/map') Map
-        li
-          a(href='/data') Data
-        li
-          a(href='/database') Projects   
-        //need to add projects page coz this foes to database
+            nav.navbar
+              ul
+                li
+                  a(href="/gallery") Gallery
+                li
+                  a(href='/map') Map
+                li
+                  a(href='/data') Data
+                li
+                  a(href='/projects') Projects   
+                //need to add projects page coz this foes to database
     .page
       block content
     block foot
