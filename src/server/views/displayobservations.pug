@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p Query database #{title}
+
+
+  table
+    tr
+      th id
+      th species
+      th description
+      th url
+    each row, i in rows
+      tr
+      each col, i in row
+        td= col
+    
+    each row, i in rows
+      - var image = '/uploaded/'+row[3]
+      img(src=image, height='200')
