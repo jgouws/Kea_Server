@@ -7,4 +7,12 @@ block content
   form(action='uploadedimage', method='post', enctype='multipart/form-data')
     input(type='file', name='filetoupload')
     br
+    label(for='species') species 
+    br
+    input(type='text', required=true, name='species')
+    br
+    label(for='description') description
+    br
+    input(type='text', required=true, name='description')
+    br
     input(type='submit')
