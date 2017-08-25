@@ -55,21 +55,17 @@ textarea {
 .shell {
 	width:834px;
 	margin:0 auto;
-	padding-top:43px;
 }
 .gallery {
 	width:834px;
-	background:url(images/gallery-bg.gif) repeat-y 0 0;
 }
 .gallery-t {
-	background:url(images/gallery-t.gif) no-repeat 0 top;
 	min-height:595px;
 	padding:14px 19px 0 26px;
 }
 .gallery-b {
 	width:834px;
 	height:14px;
-	background:url(images/gallery-b.png) no-repeat 0 0;
 }
 .gallery-head {
 }
