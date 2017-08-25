@@ -32,6 +32,10 @@ router.post('/', function(req, res, next) {
       var filename = files.filetoupload.name;
       filename = filename.replace('/', '');
       console.log(filename);
+      console.log('feilds');
+      console.log(fields);
+      console.log('FILES');
+      console.log(files);
 
       knex('uid').select('value').then(function(result) {
         uid = result[0].value;
@@ -39,8 +43,8 @@ router.post('/', function(req, res, next) {
         knex('observations').insert({
           user_id: 1,
           image_url: uid + filename,
-          species: 'testing1234',
-          description: 'This is a bird',
+          species: fields.species,
+          description: fields.description,
           approved: true,
           latitude: '41.2865',
           longitude: '174.7762'
