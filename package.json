@@ -15,6 +15,7 @@
     "express": "~4.13.4",
     "express-session": "^1.14.0",
     "express-validator": "^2.20.8",
+    "git-hook": "^0.2.2",
     "knex": "^0.11.10",
     "morgan": "~1.7.0",
     "node-sass-middleware": "^0.11.0",
