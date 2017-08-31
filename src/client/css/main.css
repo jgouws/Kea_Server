@@ -6,7 +6,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 .page {
-  background: #efefef;
   min-height: 100%;
   padding: 0.3%; }
 
@@ -92,7 +91,9 @@ img {
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center center;
-  text-align: center; }
+  text-align: center;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); }
   #header .logo-container {
     padding: 40px 20px; }
     #header .logo-container .logo {
@@ -113,20 +114,37 @@ img {
       padding: 0; }
       #header nav.navbar ul li {
         display: inline-block;
-        width: 25%; }
+        width: 24%;
+        position: relative;
+        margin-right: 1%; }
+        #header nav.navbar ul li::after {
+          -webkit-transition: all 0.25s ease-out;
+          -moz-transition: all 0.25s ease-out;
+          -ms-transition: all 0.25s ease-out;
+          -o-transition: all 0.25s ease-out;
+          transition: all 0.25s ease-out;
+          display: block;
+          content: "";
+          background-color: #9dca52;
+          height: 7px;
+          margin-top: -7px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0; }
+        #header nav.navbar ul li:hover::after, #header nav.navbar ul li.current::after {
+          opacity: 1; }
         #header nav.navbar ul li a {
           display: block;
           height: 100%;
-          width: 97%;
-          line-height: 3em;
+          width: 100%;
+          line-height: 2.7em;
           font-size: 19px;
           font-weight: normal; }
-          #header nav.navbar ul li a:hover {
-            background: #f1f2ef; }
 
 .foot {
   width: 100%;
-  background: #68573b;
+  background: #9dca52;
   font-weight: bold;
   letter-spacing: 0.025em; }
   .foot ul {
@@ -138,7 +156,7 @@ img {
       padding: 0 3em;
       line-height: 3em;
       color: white; }
-      .foot ul li:hover {
+      .foot ul li a:hover {
         color: gray; }
 
 /*# sourceMappingURL=main.css.map */
