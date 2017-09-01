@@ -1,6 +1,10 @@
-console.log('sanity check!');
+$(function() {
+  console.log('sanity check!');
 
-function setAttribute() {
-  //this.value = 'no';
-  console.log('checkbox');
-}
+  function setAttribute() {
+    //this.value = 'no';
+    console.log('checkbox');
+  }
+
+  // const picker = datepicker('#dates');
+});

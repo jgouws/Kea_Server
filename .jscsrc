@@ -57,6 +57,7 @@
   "validateQuoteMarks": "'",
   "validateIndentation": 2,
   "excludeFiles": [
+    "src/client/js/min/*",
     "node_modules/**",
     "coverage/*",
     "build/client/*"
