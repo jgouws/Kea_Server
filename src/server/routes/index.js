@@ -8,19 +8,19 @@ const passport = require('../auth/local');
 
 router.get('/', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Kaka Go';
+  renderObject.title = 'Home';
   res.render('index', renderObject);
 });
 
 router.get('/about', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'About Kaka Go';
+  renderObject.title = 'About';
   res.render('about', renderObject);
 });
 
 router.get('/data', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Kaka Go Data';
+  renderObject.title = 'Data';
   res.render('data', renderObject);
 });
 
@@ -32,19 +32,13 @@ router.get('/gallery', function (req, res, next) {
 
 router.get('/map', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Kaka Go Map';
+  renderObject.title = 'Map';
   res.render('map', renderObject);
-});
-
-router.get('/data', function (req, res, next) {
-  const renderObject = {};
-  renderObject.title = 'Please Log-in to continue';
-  res.render('data', renderObject);
 });
 
 router.get('/projects', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Please Log-in to continue';
+  renderObject.title = 'Projects';
   res.render('projects', renderObject);
 });
 
@@ -54,7 +48,7 @@ router.get('/register', (req, res, next)  => {
 
 router.get('/login', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Please Log-in to continue';
+  renderObject.title = 'Login';
   res.render('login', renderObject);
 });
 

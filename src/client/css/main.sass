@@ -2,12 +2,12 @@ $green: #9dca52
 
 body
   background: #ffffff
-  // font-family: 'Source Sans Pro', sans-serif
   font-style: normal
   font-weight: 300
   position: relative
-  //padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  padding: 0
+  margin: 0
 
 .page
   min-height : 100%
@@ -15,6 +15,10 @@ body
   //display: flex
   //flex-direction: column
   //margin-bottom: -42px;
+
+.main
+  .inner-container
+    padding: 30px 0 40px
 
 .content
   padding-top: 2%
@@ -125,26 +129,7 @@ img
       li
         display: inline-block
         width: 24%
-        position: relative
         margin-right: 1%
-        &::after
-          -webkit-transition: all 0.25s ease-out
-          -moz-transition: all 0.25s ease-out
-          -ms-transition: all 0.25s ease-out
-          -o-transition: all 0.25s ease-out
-          transition: all 0.25s ease-out
-          display: block
-          content: ""
-          background-color: $green
-          height: 7px
-          margin-top: -7px
-          left: 0
-          right: 0
-          bottom: 0
-          opacity: 0
-        &:hover, &.current
-          &::after
-            opacity: 1
         a
           display: block
           height: 100%
@@ -152,6 +137,25 @@ img
           line-height: 2.7em
           font-size: 19px
           font-weight: normal
+          position: relative
+          &::after
+            -webkit-transition: all 0.25s ease-out
+            -moz-transition: all 0.25s ease-out
+            -ms-transition: all 0.25s ease-out
+            -o-transition: all 0.25s ease-out
+            transition: all 0.25s ease-out
+            display: block
+            content: ""
+            background-color: $green
+            height: 7px
+            margin-top: -7px
+            left: 0
+            right: 0
+            bottom: 0
+            opacity: 0
+          &:hover, &.current
+            &::after
+              opacity: 1
 
 
 //Footer
@@ -171,4 +175,4 @@ img
       color: white
       a
         &:hover
-          color: gray
+          color: #eee

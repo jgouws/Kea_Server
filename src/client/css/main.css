@@ -3,11 +3,16 @@ body {
   font-style: normal;
   font-weight: 300;
   position: relative;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0; }
 
 .page {
   min-height: 100%;
   padding: 0.3%; }
+
+.main .inner-container {
+  padding: 30px 0 40px; }
 
 .content {
   padding-top: 2%;
@@ -115,32 +120,32 @@ img {
       #header nav.navbar ul li {
         display: inline-block;
         width: 24%;
-        position: relative;
         margin-right: 1%; }
-        #header nav.navbar ul li::after {
-          -webkit-transition: all 0.25s ease-out;
-          -moz-transition: all 0.25s ease-out;
-          -ms-transition: all 0.25s ease-out;
-          -o-transition: all 0.25s ease-out;
-          transition: all 0.25s ease-out;
-          display: block;
-          content: "";
-          background-color: #9dca52;
-          height: 7px;
-          margin-top: -7px;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          opacity: 0; }
-        #header nav.navbar ul li:hover::after, #header nav.navbar ul li.current::after {
-          opacity: 1; }
         #header nav.navbar ul li a {
           display: block;
           height: 100%;
           width: 100%;
           line-height: 2.7em;
           font-size: 19px;
-          font-weight: normal; }
+          font-weight: normal;
+          position: relative; }
+          #header nav.navbar ul li a::after {
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            -ms-transition: all 0.25s ease-out;
+            -o-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+            display: block;
+            content: "";
+            background-color: #9dca52;
+            height: 7px;
+            margin-top: -7px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0; }
+          #header nav.navbar ul li a:hover::after, #header nav.navbar ul li a.current::after {
+            opacity: 1; }
 
 .foot {
   width: 100%;
@@ -157,6 +162,6 @@ img {
       line-height: 3em;
       color: white; }
       .foot ul li a:hover {
-        color: gray; }
+        color: #eee; }
 
 /*# sourceMappingURL=main.css.map */
