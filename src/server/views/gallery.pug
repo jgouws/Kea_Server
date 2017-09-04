@@ -8,12 +8,13 @@ block content
         .image-container
           .image-inner-container
             img(src=src)
-          h4.type=type
-          h5
-            span.location=location
-            span , 
-            span.time=time
-          p.description=description
+          .image-content
+            h4.type=type
+            h5
+              span.location=location
+              span , 
+              span.time=time
+            p.description=description
       
       #gallery
         +image('/images/kaka-bird.jpg', 'Sighting', 'Wellington', '10pm', 'Saw this one eating')

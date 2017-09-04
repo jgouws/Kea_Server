@@ -2,6 +2,12 @@ mixin option(val, label)
   option(value=val)=label
 
 #filter-menu
-  input#dates
-  select#locations
-  select#observations
+  h3 Filter
+  .inputs
+    .input-group.date(data-provide='datepicker')
+      input.form-control(type='text')
+      .input-group-addon
+    select#locations
+      option(disabled selected value='') Locations
+    select#observations
+      option(disabled selected value='') Observation Types
