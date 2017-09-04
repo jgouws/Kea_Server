@@ -6,9 +6,9 @@ $(function() {
     console.log('checkbox');
   }
 
-  // $('.date').datepicker({
-  //   format: 'mm/dd/yyyy',
-  //   startDate: '-3d'
-  // });
+  $('.date').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+  });
 
 });
