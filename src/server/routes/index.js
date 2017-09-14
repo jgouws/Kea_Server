@@ -14,8 +14,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/about', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Kaka Go';
-  res.render('index', renderObject);
+  renderObject.title = 'About Kaka Go';
+  res.render('about', renderObject);
 });
 
 router.get('/data', function (req, res, next) {
@@ -26,7 +26,7 @@ router.get('/data', function (req, res, next) {
 
 router.get('/gallery', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Kaka Go Gallery';
+  renderObject.title = 'Gallery';
   res.render('gallery', renderObject);
 });
 
