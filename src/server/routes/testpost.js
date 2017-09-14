@@ -12,7 +12,6 @@ router.get('/', function (req, res, next) {
   res.render('index', renderObject);
 });
 
-
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});
 }
