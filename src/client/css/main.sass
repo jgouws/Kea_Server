@@ -1,19 +1,24 @@
+$green: #9dca52
+
 body
   background: #ffffff
-  // font-family: 'Source Sans Pro', sans-serif
   font-style: normal
   font-weight: 300
   position: relative
-  //padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+  padding: 0
+  margin: 0
 
 .page
-  background: #efefef
   min-height : 100%
   padding: 0.3%
   //display: flex
-  //flex-direction: column  
+  //flex-direction: column
   //margin-bottom: -42px;
+
+.main
+  .inner-container
+    padding: 30px 0 40px
 
 .content
   padding-top: 2%
@@ -94,13 +99,15 @@ img
   width: 100%
   max-width: 100%
 
-//-header style 
+//-header style
 
 #header
   -webkit-background-size: cover
   background-size: cover
   background-position: center center
   text-align: center
+  -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
   .logo-container
     padding: 40px 20px
     .logo
@@ -115,28 +122,84 @@ img
     letter-spacing: 0.025em
     margin: 0 auto
     min-height: 0
+    border: none
     ul
       text-align: center
       margin: 0
       padding: 0
       li
         display: inline-block
-        width: 25%
+        width: 24%
+        margin-right: 1%
         a
           display: block
           height: 100%
-          width: 97%
-          line-height: 3em
+          width: 100%
+          line-height: 2.7em
           font-size: 19px
           font-weight: normal
-          &:hover
-            background: #f1f2ef
+          position: relative
+          &::after
+            -webkit-transition: all 0.25s ease-out
+            -moz-transition: all 0.25s ease-out
+            -ms-transition: all 0.25s ease-out
+            -o-transition: all 0.25s ease-out
+            transition: all 0.25s ease-out
+            display: block
+            content: ""
+            background-color: $green
+            height: 7px
+            margin-top: -7px
+            left: 0
+            right: 0
+            bottom: 0
+            opacity: 0
+          &:hover, &.current
+            &::after
+              opacity: 1
 
+#filter-menu
+  -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
+  margin-bottom: 40px
+  h3
+    background-color: $green
+    color: #fff
+    text-transform: none
+    letter-spacing: normal
+    padding: 10px
+    font-size: 18px
+  .inputs
+    padding: 10px
+
+
+#gallery
+  .image-container
+    width: 300px
+    height: 320px
+    display: block
+    float: left
+    margin-right: 30px
+    margin-bottom: 40px
+    .image-inner-container
+      display: flex
+      justify-content: center
+      align-items: center
+      overflow: hidden
+      -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
+      box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
+      img
+        object-fit: cover
+        min-width: 100%
+        min-height: 100%
+    .image-content
+      display: none
+      opacity: 0
 
 //Footer
 .foot
   width: 100%
-  background: #68573b
+  background: $green
   font-weight: bold
   letter-spacing: 0.025em
   ul
@@ -148,5 +211,6 @@ img
       padding: 0 3em
       line-height: 3em
       color: white
-      &:hover
-        color: gray
+      a
+        &:hover
+          color: #eee

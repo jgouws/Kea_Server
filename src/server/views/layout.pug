@@ -1,13 +1,14 @@
 doctype html
 html(lang='en')
   head
-    block head
       meta(charset='utf-8')
       meta(http-equiv='X-UA-Compatible', content='IE=edge')
       meta(name='viewport', content='width=device-width, initial-scale=1')
       meta(name='description', content='')
       meta(name='author', content='')
-      link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css')
+      title #{title} - KakaGo
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/bootstrap-datepicker3.min.css')
       link(rel='stylesheet', type='text/css', href='//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css')
       link(rel='stylesheet', href='/css/main.css')
       link(rel='shortcut icon', type='image/x-icon', href='/images/kakago-logo.png')
@@ -17,7 +18,8 @@ html(lang='en')
         .row
           .col-md-12
             .logo-container
-              img(src='/images/kakago-logo.png', class='logo')
+              a(href='/')
+                img(src='/images/kakago-logo.png', class='logo')
               //h1.wow.fadeIn(data-wow-delay='1.6s') KaKa Go
               //h3.wow.fadeInUp(data-wow-delay='1.9s') Six HTML pages include
             nav.navbar
@@ -33,17 +35,16 @@ html(lang='en')
                 //need to add projects page coz this foes to database
     .page
       block content
-        .content
-    block foot
-      .foot
-        ul
-          li
-            a(href='/about') About
-          li
-            Copyright © KakaGo 2017
-          //li
-            //a(href='/help') Help
-
-    script(type='text/javascript', src='http://code.jquery.com/jquery-2.1.4.min.js')
-    script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
-    script(type='text/javascript', src='/js/main.js')
+    footer.foot
+      ul
+        li
+          a(href='/about') About
+        li
+          Copyright © KakaGo 2017
+        //li
+        //a(href='/help') Help
+        
+        script(type='text/javascript', src='/js/min/jquery-3.2.1.min.js')
+        script(type='text/javascript', src='/js/min/bootstrap.min.js')
+        script(type='text/javascript', src='/js/min/bootstrap-datepicker.min.js')
+        script(type='text/javascript', src='/js/main.js')
