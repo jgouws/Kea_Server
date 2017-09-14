@@ -5,7 +5,10 @@ mixin option(val, label)
   h3 Filter
   .inputs
     .input-group.date(data-provide='datepicker')
-      input.form-control(type='text')
+      input.form-control#from(type='text')
+      .input-group-addon
+    .input-group.date(data-provide='datepicker')
+      input.form-control#to(type='text')
       .input-group-addon
     select#locations
       option(disabled selected value='') Locations
