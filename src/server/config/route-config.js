@@ -12,6 +12,8 @@
     const uploadimageRoutes = require('../routes/uploadimage');
     const uploadedimageRoutes = require('../routes/uploadedimage');
     const displayobservationsRoutes = require('../routes/displayobservations');
+    const exportobservationsRoutes = require('../routes/exportobservations');
+    const testpostRoutes = require('../routes/testpost');
 
     // *** register routes *** //
     app.use('/', routes);
@@ -20,6 +22,8 @@
     app.use('/uploadimage', uploadimageRoutes);
     app.use('/uploadedimage', uploadedimageRoutes);
     app.use('/displayobservations', displayobservationsRoutes);
+    app.use('/exportobservations', exportobservationsRoutes);
+    app.use('/testpost', testpostRoutes);
   };
 
 })(module.exports);
