@@ -4,6 +4,21 @@ block content
     .inner-container
       include filter-menu
       
+      mixin row(image, observation, time, location)
+        tr
+          td
+            input(type='checkbox')
+          td
+            img(src=image)
+          td
+            span= observation
+          td
+            span= time
+          td
+            span= location
+            
+      span #{data.length}
+            
       table
         th
           td 
@@ -11,14 +26,19 @@ block content
           td Observation
           td Time Taken
           td Location
-  
+          
+          //- +row('image', 'ob', '12', 'loco')
+          
+
+          
+            //- +row(i.image_url, i.species, i.date_created, i.longitude)
   
   
   
   
 
-  //- //This function will be called when checking each box to change
-  //- //The corresponding variable
+  //-This function will be called when checking each box to change
+  //-The corresponding variable
 
   //- - var something = function() {
   //- -   console.log('something');

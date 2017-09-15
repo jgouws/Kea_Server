@@ -6,6 +6,10 @@ const indexController = require('../controllers/index');
 const authHelpers = require('../auth/_helpers');
 const passport = require('../auth/local');
 
+const knex = require('../../../src/server/db/knex');
+
+const exportobservations = require('../controllers/exportobservations');
+
 router.get('/', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Home';
@@ -21,6 +25,7 @@ router.get('/about', function (req, res, next) {
 router.get('/data', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Data';
+  renderObject.data = getObservations();
   res.render('data', renderObject);
 });
 
@@ -73,6 +78,25 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   req.logout();
   handleResponse(res, 200, 'success');
 });
+
+function getObservations() {
+  var obs = [];
+  var query = knex.select('*').from('observations').then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      obs[i] = {};
+      obs[i].id = result[i].id;
+      obs[i].user_id = result[i].user_id;
+      obs[i].image_url = result[i].image_url;
+      obs[i].species = result[i].species;
+      obs[i].description = result[i].description;
+      obs[i].approved = result[i].approved;
+      obs[i].latitude = result[i].latitude;
+      obs[i].latitude = result[i].latitude;
+      obs[i].created_at = result[i].created_at;
+    }
+  });
+  return obs;
+}
 
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});
