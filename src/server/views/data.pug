@@ -1,11 +1,25 @@
 extends layout
 block content
+
   script.
-    var testFunc = function(){
-      console.log('testFunc')
+    //Initialse the count boolean array to be set to true
+    var totalAttributes;
+    var attributeSelection = [totalAttributes];
+    for (var count = 0; count < totalAttributes; count ++){
+      attributeSelection[count] = false;
     }
-  button(onclick ='testFunc()') Click
-  
+
+    var generateRequest = function(var i){
+      //console.log('testFunc')
+      attributeSelection[i] = true;
+      console.log('set' + i + ' true');
+    }
+
+  button(onclick ='generateRequest(0)') Click
+  button(onclick ='generateRequest(1)') Click
+  button(onclick ='generateRequest(2)') Click
+  button(onclick ='generateRequest(3)') Click
+
   .container.main
     .inner-container
       include filter-menu
