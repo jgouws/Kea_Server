@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../../../src/server/db/knex');
 
-const indexController = require('../controllers/appupload');
 
-router.get('/', function (req, res, next) {
-    res.write('hello world');
-    res.end();
+router.post('/', function (req, res, next) {
+
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        
+    });
 });
 
 module.exports = router;
