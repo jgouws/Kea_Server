@@ -1,5 +1,11 @@
 extends layout
 block content
+  script.
+    var testFunc = function(){
+      console.log('testFunc')
+    }
+  button(onclick ='testFunc()') Click
+  
   .container.main
     .inner-container
       include filter-menu
