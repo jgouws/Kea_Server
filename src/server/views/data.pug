@@ -1,24 +1,64 @@
 extends layout
 block content
+
+  script.
+    //Initialse the count boolean array to be set to true
+    var totalAttributes;
+    var attributeSelection = [totalAttributes];
+    for (var count = 0; count < totalAttributes; count ++){
+      attributeSelection[count] = false;
+    }
+
+    var generateRequest = function(i){
+      //console.log('testFunc')
+      attributeSelection[i] = true;
+      console.log('set' + i + ' true');
+    }
+
+  button(onclick ='generateRequest(0)') Click
+  button(onclick ='generateRequest(1)') Click
+  button(onclick ='generateRequest(2)') Click
+  button(onclick ='generateRequest(3)') Click
+
   .container.main
     .inner-container
       include filter-menu
       
+      mixin row(image, observation, time, location)
+        tr
+          td
+            input(type='checkbox')
+          td
+            img(src=image)
+          td
+            span= observation
+          td
+            span= time
+          td
+            span= location
+            
+      span #{data.length}
+            
       table
         th
-          td 
+          td
           td Image
           td Observation
           td Time Taken
           td Location
-  
+          
+          //- +row('image', 'ob', '12', 'loco')
+          
+
+          
+            //- +row(i.image_url, i.species, i.date_created, i.longitude)
   
   
   
   
 
-  //- //This function will be called when checking each box to change
-  //- //The corresponding variable
+  //-This function will be called when checking each box to change
+  //-The corresponding variable
 
   //- - var something = function() {
   //- -   console.log('something');
@@ -26,53 +66,12 @@ block content
 
   //- .datapage_format
   //-   h1= title
-  //-   
-  //-   
-    
+  //-
+  //-
+
     //- p This is the page to export data
     //- p Please choose which attributes you want to export
-    //- 
-    //- 
-    
+    //-
+    //-
 
-    //- //These variables represent a boolean value for each checkbox.
-    //- //They are initially false, though when checked by the user they
-    //- //Will become true. This enables access to the checkboxes state.
-    //- -var attr1 = false;
-    //- -var attr2 = false;
-    //- -var attr3 = false;
-    //- -var attr4 = false;
-    //- -var attr5 = false;
-    //- -var attr6 = false;
-    //- -var attr7 = false;
-    //- 
-    //- 
-    //- 
-    //- //The following checkboxes are to be used to filter attributes when exporting
-    //- //data. This will enable the researcher to filter results and only choose
-    //- //the ones they actually want.
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr1(type='checkbox', value='yes', onclick='setAttribute')
-    //-   label attr1
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr2(type='checkbox',value='Yes')
-    //-   label attr2
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr3(type='checkbox',value='Yes')
-    //-   label attr3
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr4(type='checkbox',value='Yes')
-    //-   label attr4
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr5(type='checkbox',value='Yes')
-    //-   label attr5
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr6(type='checkbox',value='Yes')
-    //-   label attr6
-    //- div.checkbox-inline
-    //-   input.checkbox-input#attr7(type='checkbox',value='Yes')
-    //-   label attr7
-    //- br
-    //- 
-    //- //This button will generate the SQL query based on which boxes were selected
-    //- button(onclick='something()') Fetch Data
+    input(type = 'checkbox' checked = true onclick = 'tempClick')

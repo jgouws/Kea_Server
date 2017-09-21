@@ -14,6 +14,7 @@
     const displayobservationsRoutes = require('../routes/displayobservations');
     const exportobservationsRoutes = require('../routes/exportobservations');
     const testpostRoutes = require('../routes/testpost');
+    const appuploadRoutes = require('../routes/appupload');
 
     // *** register routes *** //
     app.use('/', routes);
@@ -24,6 +25,7 @@
     app.use('/displayobservations', displayobservationsRoutes);
     app.use('/exportobservations', exportobservationsRoutes);
     app.use('/testpost', testpostRoutes);
+    app.use('/appupload', appuploadRoutes);
   };
 
 })(module.exports);
