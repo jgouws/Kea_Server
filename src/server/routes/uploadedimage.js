@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
   // Parse the web form uoloaded by the user
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
-    
+
     // Checking file name to see if they uploaded a image
     var filetype = files.filetoupload.type;
     var allowedTypes = [
