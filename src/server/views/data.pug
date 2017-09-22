@@ -14,11 +14,11 @@ block content
       attributeSelection[i] = true;
       console.log('set' + i + ' true');
     }
-
-  button(onclick ='generateRequest(0)') Click
-  button(onclick ='generateRequest(1)') Click
-  button(onclick ='generateRequest(2)') Click
-  button(onclick ='generateRequest(3)') Click
+  //- 
+  //- button(onclick ='generateRequest(0)') Click
+  //- button(onclick ='generateRequest(1)') Click
+  //- button(onclick ='generateRequest(2)') Click
+  //- button(onclick ='generateRequest(3)') Click
 
   .container.main
     .inner-container
@@ -26,36 +26,28 @@ block content
       
       mixin row(image, observation, time, location)
         tr
-          td
+          td.checkbox-cell
             input(type='checkbox')
-          td
-            img(src=image)
-          td
+          td.image-cell
+            a.image-link
+              img(src=image)
+          td.ob-cell
             span= observation
-          td
+          td.time-cell
             span= time
-          td
+          td.loc-cell
             span= location
             
-      span #{data.length}
-            
-      table
-        th
-          td
-          td Image
-          td Observation
-          td Time Taken
-          td Location
+      table.kaka-data-table
+        tr
+          th
+          th Image
+          th Observation
+          th Time Taken
+          th Location
           
-          //- +row('image', 'ob', '12', 'loco')
-          
-
-          
-            //- +row(i.image_url, i.species, i.date_created, i.longitude)
-  
-  
-  
-  
+        for dt in data
+          +row(dt.image_url, dt.species, dt.created_at, dt.longitude)
 
   //-This function will be called when checking each box to change
   //-The corresponding variable
@@ -71,7 +63,4 @@ block content
 
     //- p This is the page to export data
     //- p Please choose which attributes you want to export
-    //-
-    //-
-
-    input(type = 'checkbox' checked = true onclick = 'tempClick')
+    //- input(type = 'checkbox' checked = true onclick = 'tempClick')
