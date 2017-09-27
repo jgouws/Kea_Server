@@ -128,11 +128,7 @@ describe('routes : index', () => {
       .get('/logout')
       .end((err, res) => {
         should.not.exist(err);
-        // res.redirects.length.should.eql(0);    //SHOULD REDIRECT BACK TO LOGIN PAGE
-        // res.status.should.eql(200);   //200 means sucessful
-        // res.type.should.eql('application/json');
-        // res.body.status.should.eql('success');
-        res.redirects.length.should.eql(1);   //redirect to homepage
+        res.redirects.length.should.eql(1);
         res.status.should.eql(200);
         res.type.should.eql('text/html');
         done();

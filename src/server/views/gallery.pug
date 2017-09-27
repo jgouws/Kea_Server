@@ -17,7 +17,5 @@ block content
             p.description=description
       
       #gallery
-        +image('/images/kaka-bird.jpg', 'Sighting', 'Wellington', '10pm', 'Saw this one eating')
-        +image('/images/kaka-bird.jpg', 'Sighting', 'Wellington', '10pm', 'Saw this one eating')
-        
-
+        for dt in data
+          +image(dt.image_url, dt.species, dt.longitude, dt.created_at, dt.description)
