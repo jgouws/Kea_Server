@@ -1,3 +1,17 @@
+/*funct (req, res, next){} Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
+Middleware functions can perform the following tasks:
+
+Execute any code.
+Make changes to the request and the response objects.
+End the request-response cycle.
+Call the next middleware in the stack.
+
+renderobject = creates a data obj that talks to the page and inserts to where the tag is eg obj.title for '/'(the homepage), where in the pug file it says #title, the data passed to th teh obj will place it there.
+
+router.get('/', function (req, res, next) {......});
+uses get to requests from the page '/' and alters the results using 
+*/
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,8 +24,10 @@ const knex = require('../../../src/server/db/knex');
 
 const exportobservations = require('../controllers/exportobservations');
 
+
+//Set up pages//////////////////////////////////////////////////////////
 router.get('/', function (req, res, next) {
-  const renderObject = {};
+  const renderObject = {};  
   renderObject.title = 'Home';
   res.render('index', renderObject);
 });
@@ -57,11 +73,13 @@ router.get('/login', function (req, res, next) {
   res.render('login', renderObject);
 });
 
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+
+//Authenticate loggin in and out ///////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/login', (req, res, next) => {  
+  passport.authenticate('local', (err, user, info) => {   //does it send local to server and request err, user, info as response
     if (err) {
       console.log(err.stack);
-      handleResponse(res, 500, 'error');
+      handleResponse(res, 500, 'error');  //error 500 = internal server error
     }
     if (!user) { handleResponse(res, 404, 'User not found'); }
     if (user) {
@@ -76,7 +94,7 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   req.logout();
-  handleResponse(res, 200, 'success');
+  res.redirect('/login');
 });
 
 function getObservations() {
