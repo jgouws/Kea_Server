@@ -8,26 +8,8 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('observations').insert({
           user_id: 1,
-          image_url: path.join(__dirname, '../../../client/uploads/bird_1.jpg'),
+          image_url: '/uploads/bird_1.jpg',
           species: 'Kakapo',
-          description: 'This is a bird',
-          approved: true,
-          latitude: '41.2865',
-          longitude: '174.7762'
-        }),
-        knex('observations').insert({
-          user_id: 1,
-          image_url: path.join(__dirname, '../../../client/uploads/bird_2.jpg'),
-          species: 'Parrot',
-          description: 'This is a bird',
-          approved: true,
-          latitude: '41.2865',
-          longitude: '174.7762'
-        }),
-        knex('observations').insert({
-          user_id: 2,
-          image_url: path.join(__dirname, '../../../client/uploads/bird_3.jpg'),
-          species: 'Kiwi',
           description: 'This is a bird',
           approved: true,
           latitude: '41.2865',

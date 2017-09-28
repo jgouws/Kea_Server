@@ -45,12 +45,13 @@ router.post('/', function(req, res, next) {
       // Fetch a UID from uid database.
       // UID appened to image name to prevent duplicates.
       knex('uid').select('value').then(function(result) {
+        image_folder = '/uploaded/'
         uid = result[0].value;
 
         // Add users observation details to the database
         knex('observations').insert({
           user_id: 1,
-          image_url: uid + filename,
+          image_url: image_folder + uid + filename,
           species: fields.species,
           description: fields.description,
           approved: true,
