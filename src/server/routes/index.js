@@ -1,3 +1,17 @@
+/*funct (req, res, next){} Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
+Middleware functions can perform the following tasks:
+
+Execute any code.
+Make changes to the request and the response objects.
+End the request-response cycle.
+Call the next middleware in the stack.
+
+renderobject = creates a data obj that talks to the page and inserts to where the tag is eg obj.title for '/'(the homepage), where in the pug file it says #title, the data passed to th teh obj will place it there.
+
+router.get('/', function (req, res, next) {......});
+uses get to requests from the page '/' and alters the results using 
+*/
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,6 +24,7 @@ const knex = require('../../../src/server/db/knex');
 
 const exportobservations = require('../controllers/exportobservations');
 
+//Set up pages//////////////////////////////////////////////////////////
 router.get('/', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Home';
@@ -25,20 +40,37 @@ router.get('/about', function (req, res, next) {
 router.get('/data', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Data';
-  renderObject.data = getObservations();
-  res.render('data', renderObject);
+  renderObject.data = [];
+  var query = knex.select('*').from('observations').then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.data.push(result[i]);
+    }
+    res.render('data', renderObject);
+  });
 });
 
 router.get('/gallery', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Gallery';
-  res.render('gallery', renderObject);
+  renderObject.data = [];
+  var query = knex.select('*').from('observations').then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.data.push(result[i]);
+    }
+    res.render('gallery', renderObject);
+  });
 });
 
 router.get('/map', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Map';
-  res.render('map', renderObject);
+  renderObject.data = [];
+  var query = knex.select('*').from('observations').then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.data.push(result[i]);
+    }
+    res.render('map', renderObject);
+  });
 });
 
 router.get('/projects', function (req, res, next) {
@@ -57,11 +89,13 @@ router.get('/login', function (req, res, next) {
   res.render('login', renderObject);
 });
 
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+
+//Authenticate loggin in and out ///////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/login', (req, res, next) => {   
+  passport.authenticate('local', (err, user, info) => {  
     if (err) {
       console.log(err.stack);
-      handleResponse(res, 500, 'error');
+      handleResponse(res, 500, 'error');  //error 500 = internal server error
     }
     if (!user) { handleResponse(res, 404, 'User not found'); }
     if (user) {
@@ -76,26 +110,57 @@ router.post('/login', (req, res, next) => {
 
 router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   req.logout();
-  handleResponse(res, 200, 'success');
+  res.redirect('/login');
 });
 
-function getObservations() {
-  var obs = [];
+router.post('/gallery', (req, res, next) => {  
+ var fromD = req.body.fromDate;
+ var toD = req.body.toDate;
+ var loc = req.body.locations;
+ var ob = req.body.obs; 
+ //console.log(req.body.obs); 
+ const renderObject = {};
+  renderObject.title = 'Gallery';
+  renderObject.data = [];
+  var subqueryFrom = knex.select('created_at').from('observations')
+  .where({'created_at': fromD})
+  .orWhere('created_at', '>', fromD);
+
+  var subqueryTo = knex.select('created_at').from('observations')
+  .where({'created_at': toD})
+  .orWhere('created_at', '<', toD);
+
+  var subqueryDate = knex.select('created_at').from('observations')
+  .where('created_at', 'in', subqueryFrom)
+  .andWhere('created_at', 'in', subqueryTo);
+
+  var query = knex.select('*').from('observations')
+  .where({
+    species: ob,
+    longitude:  loc
+  })
+  .then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.data.push(result[i]);
+      console.log(result[i]);
+    }
+    res.render('gallery', renderObject);
+  });
+
+  //.andWhere('created_at', 'in', subqueryDate)
+
+});
+
+function getImages(req, res, next, fromDate, toDate, location, observation) {
+  const renderObject = {};
+  renderObject.title = 'Images';
+  renderObject.img = [];
   var query = knex.select('*').from('observations').then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
-      obs[i] = {};
-      obs[i].id = result[i].id;
-      obs[i].user_id = result[i].user_id;
-      obs[i].image_url = result[i].image_url;
-      obs[i].species = result[i].species;
-      obs[i].description = result[i].description;
-      obs[i].approved = result[i].approved;
-      obs[i].latitude = result[i].latitude;
-      obs[i].latitude = result[i].latitude;
-      obs[i].created_at = result[i].created_at;
+      renderObject.img.push(result[i]);
     }
+    res.render('gallery', renderObject);
   });
-  return obs;
 }
 
 function handleResponse(res, code, statusMsg) {
