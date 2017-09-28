@@ -37,11 +37,11 @@
       sourceMap: true
     }));
     // uncomment if using express-session
-    // app.use(session({
-    //   secret: process.env.SECRET_KEY,
-    //   resave: false,
-    //   saveUninitialized: true
-    // }));
+    app.use(session({
+      secret: process.env.SECRET_KEY,
+      resave: false,
+      saveUninitialized: true
+    }));
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash());
