@@ -113,6 +113,56 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   res.redirect('/login');
 });
 
+router.post('/gallery', (req, res, next) => {  
+ var fromD = req.body.fromDate;
+ var toD = req.body.toDate;
+ var loc = req.body.locations;
+ var ob = req.body.obs; 
+ //console.log(req.body.obs); 
+ const renderObject = {};
+  renderObject.title = 'Gallery';
+  renderObject.data = [];
+  var subqueryFrom = knex.select('created_at').from('observations')
+  .where({'created_at': fromD})
+  .orWhere('created_at', '>', fromD);
+
+  var subqueryTo = knex.select('created_at').from('observations')
+  .where({'created_at': toD})
+  .orWhere('created_at', '<', toD);
+
+  var subqueryDate = knex.select('created_at').from('observations')
+  .where('created_at', 'in', subqueryFrom)
+  .andWhere('created_at', 'in', subqueryTo);
+
+  var query = knex.select('*').from('observations')
+  .where({
+    species: ob,
+    longitude:  loc
+  })
+  .then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.data.push(result[i]);
+      console.log(result[i]);
+    }
+    res.render('gallery', renderObject);
+  });
+
+  //.andWhere('created_at', 'in', subqueryDate)
+
+});
+
+function getImages(req, res, next, fromDate, toDate, location, observation) {
+  const renderObject = {};
+  renderObject.title = 'Images';
+  renderObject.img = [];
+  var query = knex.select('*').from('observations').then(function(result) {
+    for (var i = 0 ; i < result.length; i++) {
+      renderObject.img.push(result[i]);
+    }
+    res.render('gallery', renderObject);
+  });
+}
+
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});
 }
