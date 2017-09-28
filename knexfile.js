@@ -2,7 +2,7 @@ const databaseName = 'kakago';
 
 module.exports = {
   aws_env: {
-    client: 'pg',
+    client: 'postgresql',
     connection: {
       host: 'kakago-dev.co9uyqykwiln.us-west-1.rds.amazonaws.com',
       port: 5432,
