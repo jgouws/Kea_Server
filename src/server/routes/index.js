@@ -118,21 +118,10 @@ router.post('/gallery', (req, res, next) => {
  var toD = req.body.toDate;
  var loc = req.body.locations;
  var ob = req.body.obs; 
- //console.log(req.body.obs); 
+ console.log(fromD); 
  const renderObject = {};
   renderObject.title = 'Gallery';
   renderObject.data = [];
-  var subqueryFrom = knex.select('created_at').from('observations')
-  .where({'created_at': fromD})
-  .orWhere('created_at', '>', fromD);
-
-  var subqueryTo = knex.select('created_at').from('observations')
-  .where({'created_at': toD})
-  .orWhere('created_at', '<', toD);
-
-  var subqueryDate = knex.select('created_at').from('observations')
-  .where('created_at', 'in', subqueryFrom)
-  .andWhere('created_at', 'in', subqueryTo);
 
   var query = knex.select('*').from('observations')
   .where({
@@ -147,7 +136,7 @@ router.post('/gallery', (req, res, next) => {
     res.render('gallery', renderObject);
   });
 
-  //.andWhere('created_at', 'in', subqueryDate)
+  //.whereBetween('created_at', [fromD, toD])
 
 });
 
