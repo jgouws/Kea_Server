@@ -2,13 +2,13 @@ const databaseName = 'kakago';
 
 module.exports = {
   aws_env: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      host: 'kakago-dev.co9uyqykwiln.us-west-1.rds.amazonaws.com',
-      port: 5432,
-      user: 'kakagoadmin',
-      password: 'kkg12345',
-      database: 'kakago'
+      host: process.env.RDS_HOSTNAME,
+      port: process.env.RDS_PORT,
+      user: process.env.RDS_USERNAME,
+      password: process.env.RDS_PASSWORD,
+      database: process.env.RDS_DB_NAME
     },
     migrations: {
       directory: __dirname + '/src/server/db/migrations'
