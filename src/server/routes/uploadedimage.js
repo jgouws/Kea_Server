@@ -1,6 +1,7 @@
 const express = require('express');
 const formidable = require('formidable');
 const fs = require('fs');
+const exif = require('exif');
 const router = express.Router();
 const knex = require('../../../src/server/db/knex');
 const indexController = require('../controllers/uploadedimage');
@@ -45,16 +46,27 @@ router.post('/', function(req, res, next) {
       // Fetch a UID from uid database.
       // UID appened to image name to prevent duplicates.
       knex('uid').select('value').then(function(result) {
+        // Storage location for saved images
         image_folder = '/uploaded/'
         uid = result[0].value;
-        var date = new Date();
+        // Try and find any exif data from jpeg for location
+        try {
+          new ExifImage({ image : oldpath }, function (error, exifData) {
+              if (error)
+                  console.log('Error: '+error.message);
+              else
+                  console.log(exifData); // Do something with your data! 
+          });
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
         // Add users observation details to the database
         knex('observations').insert({
           user_id: 1,
           image_url: image_folder + uid + filename,
           observation_type: fields.species,
           description: fields.description,
-          approved: true,
+          approved: false,
           latitude: '41.2865',
           longitude: '174.7762',
           created_at: new Date()
