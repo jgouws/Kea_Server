@@ -114,20 +114,19 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
 });
 
 router.post('/gallery', (req, res, next) => {  
- var fromD = req.body.fromDate;
- var toD = req.body.toDate;
+ var fromD = req.body.fromDate+' 00:00:00.573';
+ var toD = req.body.toDate+' 23:59:59.573';
  var loc = req.body.locations;
  var ob = req.body.obs; 
- console.log(fromD); 
  const renderObject = {};
   renderObject.title = 'Gallery';
   renderObject.data = [];
 
   var query = knex.select('*').from('observations')
   .where({
-    species: ob,
+    observation_type: ob,
     longitude:  loc
-  })
+  }).whereBetween('created_at', [fromD, toD])
   .then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
       renderObject.data.push(result[i]);
@@ -136,21 +135,7 @@ router.post('/gallery', (req, res, next) => {
     res.render('gallery', renderObject);
   });
 
-  //.whereBetween('created_at', [fromD, toD])
-
 });
-
-function getImages(req, res, next, fromDate, toDate, location, observation) {
-  const renderObject = {};
-  renderObject.title = 'Images';
-  renderObject.img = [];
-  var query = knex.select('*').from('observations').then(function(result) {
-    for (var i = 0 ; i < result.length; i++) {
-      renderObject.img.push(result[i]);
-    }
-    res.render('gallery', renderObject);
-  });
-}
 
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});

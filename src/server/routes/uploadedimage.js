@@ -47,16 +47,17 @@ router.post('/', function(req, res, next) {
       knex('uid').select('value').then(function(result) {
         image_folder = '/uploaded/'
         uid = result[0].value;
-
+        var date = new Date();
         // Add users observation details to the database
         knex('observations').insert({
           user_id: 1,
           image_url: image_folder + uid + filename,
-          species: fields.species,
+          observation_type: fields.species,
           description: fields.description,
           approved: true,
           latitude: '41.2865',
-          longitude: '174.7762'
+          longitude: '174.7762',
+          created_at: new Date()
         }).then(function(result) {
           // Path to saved image on the server
           var newpath = './src/client/uploaded/' + uid + filename;

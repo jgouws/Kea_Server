@@ -9,11 +9,11 @@ exports.seed = function(knex, Promise) {
         knex('observations').insert({
           user_id: 1,
           image_url: '/uploads/bird_1.jpg',
-          species: 'Kakapo',
+          observation_type: 'Kakapo',
           description: 'This is a bird',
           approved: true,
           latitude: '41.2865',
-          longitude: '174.7762'
+          longitude: '174.7762'    
         })
       ]);
     });
