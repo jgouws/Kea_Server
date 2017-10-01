@@ -47,15 +47,15 @@ router.post('/', function(req, res, next) {
       // UID appened to image name to prevent duplicates.
       knex('uid').select('value').then(function(result) {
         // Storage location for saved images
-        image_folder = '/uploaded/'
+        image_folder = '/uploaded/';
         uid = result[0].value;
         // Try and find any exif data from jpeg for location
         try {
-          new ExifImage({ image : oldpath }, function (error, exifData) {
-              if (error)
-                  console.log('Error: '+error.message);
-              else
-                  console.log(exifData); // Do something with your data! 
+          new ExifImage({ image: oldpath }, function (error, exifData) {
+            if (error)
+            console.log('Error: '+error.message);
+            else
+            console.log(exifData); // Do something with your data!
           });
         } catch (error) {
           console.log('Error: ' + error.message);

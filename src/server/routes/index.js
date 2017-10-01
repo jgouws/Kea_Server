@@ -8,8 +8,6 @@ Call the next middleware in the stack.
 
 renderobject = creates a data obj that talks to the page and inserts to where the tag is eg obj.title for '/'(the homepage), where in the pug file it says #title, the data passed to th teh obj will place it there.
 
-router.get('/', function (req, res, next) {......});
-uses get to requests from the page '/' and alters the results using 
 */
 
 const express = require('express');
@@ -24,7 +22,7 @@ const knex = require('../../../src/server/db/knex');
 
 const exportobservations = require('../controllers/exportobservations');
 
-//Set up pages//////////////////////////////////////////////////////////
+//Set up pages
 router.get('/', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Home';
@@ -89,10 +87,9 @@ router.get('/login', function (req, res, next) {
   res.render('login', renderObject);
 });
 
-
-//Authenticate loggin in and out ///////////////////////////////////////////////////////////////////////////////////////////////
-router.post('/login', (req, res, next) => {   
-  passport.authenticate('local', (err, user, info) => {  
+//Authenticate logging in and out
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.log(err.stack);
       handleResponse(res, 500, 'error');  //error 500 = internal server error
@@ -113,12 +110,12 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   res.redirect('/login');
 });
 
-router.post('/gallery', (req, res, next) => {  
- var fromD = req.body.fromDate+' 00:00:00.573';
- var toD = req.body.toDate+' 23:59:59.573';
- var loc = req.body.locations;
- var ob = req.body.obs; 
- const renderObject = {};
+router.post('/gallery', (req, res, next) => {
+  var fromD = req.body.fromDate+' 00:00:00.573';
+  var toD = req.body.toDate+' 23:59:59.573';
+  var loc = req.body.locations;
+  var ob = req.body.obs;
+  const renderObject = {};
   renderObject.title = 'Gallery';
   renderObject.data = [];
 
