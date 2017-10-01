@@ -4,14 +4,17 @@ mixin option(val, label)
 #filter-menu
   h3 Filter
   .inputs
-    .input-group.date(data-provide='datepicker')
-      input.form-control#from(type='text')
-      .input-group-addon
-    .input-group.date(data-provide='datepicker')
-      input.form-control#to(type='text')
-      .input-group-addon
-    select#locations
-      option(disabled selected value='') Locations
-    select#observations
-      option(disabled selected value='') Observation Types
+    form(method = 'post', action = '/gallery')
+      .input-group.input-daterange(data-provide='datepicker', data-date-format='yyyy-mm-dd')       
+        input.form-control#from(name='fromDate', type='text', placeholder = 'From Date', data-date-start-date='01/01/2017') 
+        .input-group-addon To
+        input.form-control#from(name='toDate', type='text', placeholder = 'To Date', data-date-end-date="0d") 
+      select#locations.form-control(name = 'locations')
+        each dt in data          
+          option(value = dt.longitude) #{dt.longitude}
+      select#observations.form-control(name = 'obs')
+        each dt in data
+          option(value = dt.observation_type) #{dt.observation_type}  
+      button(type='filter') Apply
 git 
+
