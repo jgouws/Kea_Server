@@ -4,11 +4,11 @@ module.exports = {
   aws_env: {
     client: 'pg',
     connection: {
-      host: process.env.RDS_HOSTNAME,
-      port: process.env.RDS_PORT,
-      user: process.env.RDS_USERNAME,
-      password: process.env.RDS_PASSWORD,
-      database: process.env.RDS_DB_NAME
+      host: 'kakagodbinstance.co9uyqykwiln.us-west-1.rds.amazonaws.com',
+      port: 5432,
+      user: 'kakagoadmin',
+      password: 'kkg12345',
+      database: 'kakago'
     },
     migrations: {
       directory: __dirname + '/src/server/db/migrations'
