@@ -9,21 +9,13 @@ exports.seed = function(knex, Promise) {
         knex('observations').insert({
           user_id: 1,
           image_url: '/uploads/bird_1.jpg',
-          observation_type: 'Kakapo',
+          observation_type: 'Sighting',
           description: 'This is a bird',
           approved: true,
           latitude: '41.2865',
-          longitude: '174.7762'    
+          longitude: '174.7762',
+          created_at: '2017-10-01 16:23:03.262663+13'
         })
       ]);
     });
 };
-
-//
-// table.integer('user_id').unique().notNullable();
-// table.string('image_url').unique().notNullable();
-// table.string('description').notNullable();
-// table.boolean('approved').notNullable().defaultTo(false);
-// table.double('latitude').notNullable();
-// table.double('longitude').notNullable();
-// table.timestamp('created_at').defaultTo(knex.fn.now());
