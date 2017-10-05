@@ -35,7 +35,7 @@ const knex = require('../../src/server/db/knex');
 chai.use(chaiHttp);
 passportStub.install(server);
 
-describe('routes : index', () => { 
+describe('routes : index', () => {
 
   beforeEach(() => {
     return knex.migrate.rollback()
@@ -48,7 +48,7 @@ describe('routes : index', () => {
     return knex.migrate.rollback();
   });
 
-// Tests for directing user to homepage
+  // Tests for directing user to homepage
   describe('GET /', () => {
     it('should render the index', (done) => {
       chai.request(server)
@@ -63,7 +63,7 @@ describe('routes : index', () => {
     });
   });
 
-// Tests for directing user to error page
+  // Tests for directing user to error page
   describe('GET /404', () => {
     it('should throw an error', (done) => {
       chai.request(server)
@@ -78,8 +78,8 @@ describe('routes : index', () => {
     });
   });
 
-// Tests for directing user when attempting to login. 
-//Tests sucessful login for registered user and unsucessful for non registered user 
+  // Tests for directing user when attempting to login.
+  //Tests sucessful login for registered user and unsucessful for non registered user
   describe('POST /login', () => {
     it('should login a user', (done) => {
       chai.request(server)
@@ -89,7 +89,7 @@ describe('routes : index', () => {
         // email: 'michael@kotlyar.org',
         password: 'password'
       })
-      .end((err, res) => {  
+      .end((err, res) => {
         should.not.exist(err);  //should be no error since this is a registered user
         res.redirects.length.should.eql(1);   //redirect to homepage
         res.status.should.eql(200);
@@ -116,8 +116,8 @@ describe('routes : index', () => {
     });
   });
 
-// Tests for directing user when attempting to logout
-//Tests sucessful logout for registered user and unsucessful for non registered user 
+  // Tests for directing user when attempting to logout
+  //Tests sucessful logout for registered user and unsucessful for non registered user
   describe('GET /logout', () => {
     it('should logout a user', (done) => {  //sucessful logout
       passportStub.login({
@@ -140,7 +140,7 @@ describe('routes : index', () => {
     .get('/logout')
     .end((err, res) => {
       should.exist(err);
-      res.redirects.length.should.eql(0);   
+      res.redirects.length.should.eql(0);
       res.status.should.eql(401);   //401 = unauthorised access
       res.type.should.eql('application/json');
       res.body.status.should.eql('Please log in');
@@ -148,8 +148,7 @@ describe('routes : index', () => {
     });
   });
 
-
-//May delete teh below stuff
+  //May delete the below stuff
   describe('GET /user', () => {
     it('should return a success', (done) => {
       passportStub.login({
