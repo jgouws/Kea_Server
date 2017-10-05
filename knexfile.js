@@ -9,12 +9,6 @@ module.exports = {
       user: 'kakagoadmin',
       password: 'kkg12345',
       database: 'kakago'
-    },
-    migrations: {
-      directory: __dirname + '/src/server/db/migrations'
-    },
-    seeds: {
-      directory: __dirname + '/src/server/db/seeds'
     }
   },
   development: {
