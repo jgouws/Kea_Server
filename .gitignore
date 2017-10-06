@@ -4,6 +4,7 @@ npm-debug.log
 .elasticbeanstalk/
 credentials.txt
 .env
+src/client/uploaded/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
