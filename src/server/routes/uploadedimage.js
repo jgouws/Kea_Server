@@ -49,6 +49,7 @@ router.post('/', function(req, res, next) {
         // Storage location for saved images
         image_folder = '/uploaded/';
         uid = result[0].value;
+        console.log('UID: ' + uid);
         // Try and find any exif data from jpeg for location
         // try {
         //   new ExifImage({ image: oldpath }, function (error, exifData) {
@@ -64,7 +65,7 @@ router.post('/', function(req, res, next) {
         knex('observations').insert({
           user_id: 1,
           image_url: image_folder + uid + filename,
-          observation_type: fields.species,
+          species: fields.species,
           description: fields.description,
           approved: false,
           latitude: '41.2865',
