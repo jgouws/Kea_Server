@@ -9,14 +9,12 @@ router.post('/', function(req, res, next) {
   app_description = bodydata.description;
   console.log('description=' + app_description);
 
-
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
     console.log('--------- files  --------');
     console.log(files);
     console.log('--------- feilds --------');
     console.log(fields);
-
 
     knex('uid').select('value').then(function(result) {
       // Storage location for saved images
@@ -47,8 +45,6 @@ router.post('/', function(req, res, next) {
       res.write('Observation successfully submitted');
       res.end();
     });
-
-
   });
 });
 module.exports = router;
