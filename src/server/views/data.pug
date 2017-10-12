@@ -33,6 +33,8 @@ block content
               img(src=image)
           td.ob-cell
             span= observation
+          td.d-cell
+            span= description
           td.time-cell
             span= time
           td.loc-cell
@@ -43,11 +45,12 @@ block content
           th
           th Image
           th Observation
+          th description
           th Time Taken
           th Location
           
         for dt in data
-          +row(dt.image_url, dt.species, dt.created_at, dt.longitude)
+          +row(dt.image_url, dt.observation_type, dt.description, dt.created_at, dt.longitude)
 
   //-This function will be called when checking each box to change
   //-The corresponding variable
