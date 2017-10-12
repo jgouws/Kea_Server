@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
     var allowedTypes = [
       'image/png',
       'image/jpeg',
+      'image/jpg',
       'image/gif'
     ];
 
@@ -50,17 +51,27 @@ router.post('/', function(req, res, next) {
         image_folder = '/uploaded/';
         uid = result[0].value;
         console.log('UID: ' + uid);
+
         // Try and find any exif data from jpeg for location
-        // try {
-        //   new ExifImage({ image: oldpath }, function (error, exifData) {
-        //     if (error)
-        //     console.log('Error: '+error.message);
-        //     else
-        //     console.log(exifData); // Do something with your data!
-        //   });
-        // } catch (error) {
-        //   console.log('Error: ' + error.message);
-        // }
+
+        var ExifImage = require('exif').ExifImage
+        
+        // Only JPEG/JPG files have exif data we can use
+        if('jp' in filetype){
+          try {
+            new ExifImage({ image: oldpath }, function (error, exifData) {
+              if (error)
+                console.log('Error: '+error.message);
+              else
+                console.log(exifData); // Do something with your data!
+            });
+          } catch (error) {
+            console.log('Error: ' + error.message);
+          }
+        } else{
+          console.log('Skiped exif')
+        }
+
         // Add users observation details to the database
         knex('observations').insert({
           user_id: 1,
@@ -80,6 +91,7 @@ router.post('/', function(req, res, next) {
           knex('uid').where('id', '=', '1').update({
             value: uid + 1
           }).then();
+          console.log('Updated UID')
 
           // Rename the temp file, move to storage location
           fs.rename(oldpath, newpath, function(err) {
