@@ -11,10 +11,19 @@ body
 
 .page
   min-height : 100%
-  padding: 0.3%
+  position: relative
   //display: flex
   //flex-direction: column
   //margin-bottom: -42px;
+
+#map
+  height: 100vh
+
+.container.main.map
+  position: absolute
+  z-index: 9999
+  left: 0
+  right: 0
 
 .main
   .inner-container
@@ -162,6 +171,7 @@ img
   -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
   box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
   margin-bottom: 40px
+  background-color: #fff
   h3
     background-color: $green
     color: #fff
@@ -171,7 +181,6 @@ img
     font-size: 18px
   .inputs
     padding: 10px
-
 
 #gallery
   .image-container

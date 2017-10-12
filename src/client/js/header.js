@@ -8,6 +8,7 @@ window.initMap = function() {
   ];
   var wellington = new google.maps.LatLng(-41.2865,174.7762);
   map = new google.maps.Map(document.getElementById('map'), {
+    disableDefaultUI: true,
     center: wellington,
     zoom: 5,
     mapTypeId: 'satellite'

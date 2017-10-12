@@ -1,5 +1,8 @@
 extends layout
 
 block content
-    #map
-    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDgs1JEaEOxaQER4W5lKsZP3vbw83GjqXM&callback=initMap&libraries=visualization')
+  .container.main.map
+    .inner-container
+      include filter-menu
+  #map
+  script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDgs1JEaEOxaQER4W5lKsZP3vbw83GjqXM&callback=initMap&libraries=visualization')
