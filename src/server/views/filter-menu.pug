@@ -10,10 +10,10 @@ mixin option(val, label)
         .input-group-addon To
         input.form-control#from(name='toDate', type='text', placeholder = 'To Date', data-date-end-date="0d") 
       select#locations.form-control(name = 'locations')
-        each dt in data          
+        each dt in filtr          
           option(value = dt.longitude) #{dt.longitude}
       select#observations.form-control(name = 'obs')
-        each dt in data
+        each dt in filtr
           option(value = dt.observation_type) #{dt.observation_type}  
       button(type='filter') Apply
 git 
