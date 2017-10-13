@@ -55,7 +55,7 @@ router.get('/map', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Map';
   renderObject.data = [];
-  var query = knex.select('lat').from('observations').then(function(result) {
+  var query = knex.select('*').from('observations').then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
       renderObject.data.push(result[i]);
     }
