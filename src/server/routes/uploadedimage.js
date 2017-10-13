@@ -37,13 +37,6 @@ router.post('/', function(req, res, next) {
       var filename = files.filetoupload.name;
       filename = filename.replace('/', '');
 
-      // Debugging - lists contents user uploaded
-      console.log(filename);
-      console.log('feilds');
-      console.log(fields);
-      console.log('FILES');
-      console.log(files);
-
       // Fetch a UID from uid database.
       // UID appened to image name to prevent duplicates.
       knex('uid').select('value').then(function(result) {
@@ -54,53 +47,61 @@ router.post('/', function(req, res, next) {
 
         // Try and find any exif data from jpeg for location
 
-        var ExifImage = require('exif').ExifImage
-        
+        var ExifImage = require('exif').ExifImage;
+
+        exif_latitude = '';
+        exif_longitude = '';
+
         // Only JPEG/JPG files have exif data we can use
-        if('jp' in filetype){
-          try {
-            new ExifImage({ image: oldpath }, function (error, exifData) {
-              if (error)
-                console.log('Error: '+error.message);
-              else
-                console.log(exifData); // Do something with your data!
-            });
-          } catch (error) {
-            console.log('Error: ' + error.message);
-          }
-        } else{
-          console.log('Skiped exif')
-        }
+        try {
+          new ExifImage({
+            image: oldpath
+          }, function(error, exifData) {
+            if (error)
+              console.log('Error: ' + error.message);
+            else
+            if (exifData.gps.GPSLatitude != undefined) {
+              console.log('Logging EXIF data');
+              exif_latitude = exifData.gps.GPSLatitudeRef + ' ' + exifData.gps.GPSLatitude;
+              exif_longitude = exifData.gps.GPSLongitudeRef + ' ' + exifData.gps.GPSLongitude;
+              console.log(exif_latitude);
+              console.log(exif_longitude);
 
-        // Add users observation details to the database
-        knex('observations').insert({
-          user_id: 1,
-          image_url: image_folder + uid + filename,
-          observation_type: fields.species,
-          description: fields.description,
-          approved: false,
-          latitude: '41.2865',
-          longitude: '174.7762',
-          created_at: new Date()
-        }).then(function(result) {
-          // Path to saved image on the server
-          var newpath = './src/client/uploaded/' + uid + filename;
-          console.log(newpath);
+              // Add users observation details to the database
+              knex('observations').insert({
+                user_id: 1,
+                image_url: image_folder + uid + filename,
+                observation_type: fields.species,
+                description: fields.description,
+                approved: false,
+                latitude: exif_latitude,
+                longitude: exif_longitude,
+                created_at: new Date()
+              }).then(function(result) {
+                // Path to saved image on the server
+                var newpath = './src/client/uploaded/' + uid + filename;
+                console.log(newpath);
 
-          // Update the UID value in the database
-          knex('uid').where('id', '=', '1').update({
-            value: uid + 1
-          }).then();
-          console.log('Updated UID')
+                // Update the UID value in the database
+                knex('uid').where('id', '=', '1').update({
+                  value: uid + 1
+                }).then();
+                console.log('Updated UID')
 
-          // Rename the temp file, move to storage location
-          fs.rename(oldpath, newpath, function(err) {
-            if (err) throw err;
-            // Display confirmation text page for user
-            res.write('File uploaded and moved!');
-            res.end();
+                // Rename the temp file, move to storage location
+                fs.rename(oldpath, newpath, function(err) {
+                  if (err) throw err;
+                  // Display confirmation text page for user
+                  res.write('File uploaded and moved!');
+                  res.end();
+                });
+              });
+            }
+            console.log(exifData.gps); // Do something with your data!
           });
-        });
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
       });
     }
   });
