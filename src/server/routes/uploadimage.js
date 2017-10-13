@@ -5,7 +5,7 @@ const indexController = require('../controllers/uploadimage');
 
 router.get('/', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
+  renderObject.title = 'Upload Observation';
   res.render('uploadimage', renderObject);
 });
 
