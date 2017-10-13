@@ -55,7 +55,7 @@ router.get('/map', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Map';
   renderObject.data = [];
-  var query = knex.select('*').from('observations').then(function(result) {
+  var query = knex.select('lat').from('observations').then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
       renderObject.data.push(result[i]);
     }
@@ -104,11 +104,11 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
 
 function loadGalleryFilter (req, res, next) {
   console.log("in loadGalleryFilter");
- galleryObject.filtr = []; 
+ galleryObject.filtr = [];
   var filterQuery = knex.select('*').from('observations').then(function(filterResult) {
     for (var i = 0 ; i < filterResult.length; i++) {
       galleryObject.filtr.push(filterResult[i]);
-    }  
+    }
       return next();
   });
 }
@@ -119,12 +119,12 @@ function loadGallery (req, res, next) {
   var toD = req.body.toDate+' 23:59:59.573';
   var loc = req.body.locations;
   var ob = req.body.obs;
- 
+
   galleryObject.title = 'Gallery';
   galleryObject.data = [];
   if(fromD == " 00:00:00.573" || toD == " 23:59:59.573" || loc == null || ob == null){
     console.log("no filter statements");
-    var query = knex.select('*').from('observations').then(function(result) {
+    var query = knex.select('lat,lon').from('observations').then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
         galleryObject.data.push(result[i]);
       }
@@ -157,11 +157,11 @@ router.post('/gallery', loadDataFilter, loadGallery,  renderGalleryPage);
 
 function loadDataFilter (req, res, next) {
   console.log("in loadDataFilter");
-  dataObject.filtr = []; 
+  dataObject.filtr = [];
   var filterQuery = knex.select('*').from('observations').then(function(filterResult) {
     for (var i = 0 ; i < filterResult.length; i++) {
       dataObject.filtr.push(filterResult[i]);
-    }  
+    }
       return next();
   });
 }
