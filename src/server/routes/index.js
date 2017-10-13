@@ -133,10 +133,17 @@ function loadGallery (req, res, next) {
   }else{
     console.log("filterstatements");
     var query = knex.select('*').from('observations')
-    .where({
-      observation_type: ob,
-      longitude:  loc
-    }).whereBetween('created_at', [fromD, toD])
+    .modify(function() {
+    if(loc != 'All'){
+      this.where({longitude:  loc});
+    }
+    if(ob != "All"){
+      this.where({observation_type: ob});
+    } 
+    if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
+      this.whereBetween('created_at', [fromD, toD]);
+    }
+    })
     .then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
         galleryObject.data.push(result[i]);
@@ -185,59 +192,26 @@ function loadData (req, res, next) {
       return next();
     });
   }else{
-    console.log("filterstatements");
     var query = knex.select('*').from('observations')
-    .where({
-      observation_type: ob,
-      longitude:  loc
-    }).whereBetween('created_at', [fromD, toD])
-
-
+    .modify(function() {
+    if(loc != 'All'){
+      this.where({longitude:  loc});
+    }
+    if(ob != "All"){
+      this.where({observation_type: ob});
+    } 
+    if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
+      this.whereBetween('created_at', [fromD, toD]);
+    }
+    })
     .then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
-        dataObject.data.push(result[i]);
-        console.log(result[i]);
+        dataObject.data.push(result[i]);        
       }
       return next();
     });
   }
 }
-
-// function loadData (req, res, next) {
-//   console.log("in loadData");
-//   var fromD = req.body.fromDate+' 00:00:00.573';
-//   var toD = req.body.toDate+' 23:59:59.573';
-//   var loc = req.body.locations;
-//   var ob = req.body.obs;
-
-//   dataObject.title = 'Data';
-//   dataObject.data = [];
-//   var query = knex.select('*').from('observations');
-
-//   if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
-//     query => query.whereBetween('created_at', [fromD, toD]);
-//   }
-//   if(loc != "All"){
-//     console.log("in???");
-//     query => query.where({
-//       longitude:  loc
-//     });
-//   }
-//   if(ob != "All"){
-//     query => query.where({
-//       observation_type: ob
-//     });
-//   }
-//   console.log("filterstatements");
-//   query = query.then(function(result) {
-//     for (var i = 0 ; i < result.length; i++) {
-//       dataObject.data.push(result[i]);
-//       console.log(result[i]);
-//     }
-//     return next();
-//   });
-  
-// }
 
 function renderDataPage (req, res) {
   console.log("in renderDataPage");
