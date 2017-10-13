@@ -22,7 +22,7 @@ window.initMap = function() {
 };
 
 /**
- * Customisation for
+ * Customisation for file upload input
  *
  */
 window.onload = function() {
