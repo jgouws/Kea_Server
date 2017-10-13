@@ -16,6 +16,8 @@
     const testpostRoutes = require('../routes/testpost');
     const appuploadRoutes = require('../routes/appupload');
 
+    const uploadedfromappRoutes = require('../routes/uploadedfromapp');
+
     // *** register routes *** //
     app.use('/', routes);
     app.use('/api/v1/users', usersRoutes);
@@ -26,6 +28,8 @@
     app.use('/exportobservations', exportobservationsRoutes);
     app.use('/testpost', testpostRoutes);
     app.use('/appupload', appuploadRoutes);
+
+    app.use('/uploadedfromapp', uploadedfromappRoutes);
   };
 
 })(module.exports);
