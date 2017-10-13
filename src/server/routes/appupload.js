@@ -6,6 +6,7 @@ const knex = require('../../../src/server/db/knex');
 router.post('/', function(req, res, next) {
 
   bodydata = req.body;
+  console.log('body = ' + bodydata);
   app_description = bodydata.description;
   console.log('description=' + app_description);
 
@@ -27,7 +28,7 @@ router.post('/', function(req, res, next) {
       knex('observations').insert({
         user_id: 1,
         image_url: uid,
-        species: 'spooky skeleton via IOS',
+        observation_type: 'spooky skeleton via IOS',
         description: app_description,
         approved: false,
         latitude: '41.2865',
