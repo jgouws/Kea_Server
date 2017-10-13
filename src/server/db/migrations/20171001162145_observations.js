@@ -6,8 +6,8 @@ exports.up = (knex, Promise) => {
     table.string('observation_type').notNullable();
     table.string('description').notNullable();
     table.boolean('approved').notNullable().defaultTo(false);
-    table.double('latitude').notNullable();
-    table.double('longitude').notNullable();
+    table.string('latitude').notNullable();
+    table.string('longitude').notNullable();
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
   });
 };
