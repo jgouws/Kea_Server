@@ -153,7 +153,7 @@ function renderGalleryPage (req, res) {
 }
 
 router.get('/gallery', loadGalleryFilter, loadGallery,  renderGalleryPage);
-router.post('/gallery', loadDataFilter, loadGallery,  renderGalleryPage);
+router.post('/gallery', loadGalleryFilter, loadGallery,  renderGalleryPage);
 
 function loadDataFilter (req, res, next) {
   console.log("in loadDataFilter");
@@ -168,15 +168,76 @@ function loadDataFilter (req, res, next) {
 
 function loadData (req, res, next) {
   console.log("in loadData");
+  var fromD = req.body.fromDate+' 00:00:00.573';
+  var toD = req.body.toDate+' 23:59:59.573';
+  var loc = req.body.locations;
+  var ob = req.body.obs;
+
   dataObject.title = 'Data';
   dataObject.data = [];
-  var query = knex.select('*').from('observations').then(function(result) {
-    for (var i = 0 ; i < result.length; i++) {
-      dataObject.data.push(result[i]);
-    }
-    return next();
-  });
+  
+  if(fromD == " 00:00:00.573" || toD == " 23:59:59.573" || loc == null || ob == null){
+    console.log("no filter statements");
+    var query = knex.select('*').from('observations').then(function(result) {
+      for (var i = 0 ; i < result.length; i++) {
+        dataObject.data.push(result[i]);
+      }
+      return next();
+    });
+  }else{
+    console.log("filterstatements");
+    var query = knex.select('*').from('observations')
+    .where({
+      observation_type: ob,
+      longitude:  loc
+    }).whereBetween('created_at', [fromD, toD])
+
+
+    .then(function(result) {
+      for (var i = 0 ; i < result.length; i++) {
+        dataObject.data.push(result[i]);
+        console.log(result[i]);
+      }
+      return next();
+    });
+  }
 }
+
+// function loadData (req, res, next) {
+//   console.log("in loadData");
+//   var fromD = req.body.fromDate+' 00:00:00.573';
+//   var toD = req.body.toDate+' 23:59:59.573';
+//   var loc = req.body.locations;
+//   var ob = req.body.obs;
+
+//   dataObject.title = 'Data';
+//   dataObject.data = [];
+//   var query = knex.select('*').from('observations');
+
+//   if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
+//     query => query.whereBetween('created_at', [fromD, toD]);
+//   }
+//   if(loc != "All"){
+//     console.log("in???");
+//     query => query.where({
+//       longitude:  loc
+//     });
+//   }
+//   if(ob != "All"){
+//     query => query.where({
+//       observation_type: ob
+//     });
+//   }
+//   console.log("filterstatements");
+//   query = query.then(function(result) {
+//     for (var i = 0 ; i < result.length; i++) {
+//       dataObject.data.push(result[i]);
+//       console.log(result[i]);
+//     }
+//     return next();
+//   });
+  
+// }
 
 function renderDataPage (req, res) {
   console.log("in renderDataPage");
@@ -184,6 +245,7 @@ function renderDataPage (req, res) {
 }
 
 router.get('/data', loadDataFilter, loadData,  renderDataPage);
+router.post('/data', loadDataFilter, loadData,  renderDataPage);
 
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});
