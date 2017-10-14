@@ -23,9 +23,10 @@ block content
   .container.main
     .inner-container
       include filter-menu
-      
-      mixin row(image, observation, time, location)
-        tr
+      form(method = 'get', action= 'javascript: window.open("\exportobservations", "Download").alert("You can save this data by right-click > save")')
+        button(type='submit') Export to CSV
+      mixin row(image, observation, description, time, location)
+        tr.kakaRows(name='row')
           td.checkbox-cell
             input(type='checkbox')
           td.image-cell
