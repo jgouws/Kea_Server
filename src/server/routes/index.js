@@ -39,28 +39,37 @@ router.get('/about', function (req, res, next) {
   res.render('about', renderObject);
 });
 
-// router.get('/data', function (req, res, next) {
-//   const renderObject = {};
-//   renderObject.title = 'Data';
-//   renderObject.data = [];
-//   var query = knex.select('*').from('observations').then(function(result) {
-//     for (var i = 0 ; i < result.length; i++) {
-//       renderObject.data.push(result[i]);
-//     }
-//     res.render('data', renderObject);
-//   });
-// });
-
 router.get('/map', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'Map';
   renderObject.data = [];
+  renderObject.lat = [];
+  renderObject.long = [];
+  renderObject.latlong = [];
+  console.log("in map");
   var query = knex.select('*').from('observations').then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
       renderObject.data.push(result[i]);
-    }
-    res.render('map', renderObject);
+      renderObject.lat.push(result[i].latitude);
+      renderObject.long.push(result[i].longitude);
+      renderObject.latlong.push(result[i].latitude+', '+ result[i].longitude);
+      console.log(renderObject.latlong[i]);
+    }    
   });
+  // var wellington = new google.maps.LatLng(-41.2865,174.7762);
+  // map = new google.maps.Map(document.getElementById('map'), {
+  //   center: wellington,
+  //   zoom: 5,
+  //   mapTypeId: 'satellite'
+  // });
+  // var heatmap = new google.maps.visualization.HeatmapLayer({
+  //   data: renderObject.latlong,
+  //   radius: 7
+  // });
+  // heatmap.setMap(map);
+  // heatmap.dissipating = false;
+
+  res.render('map', renderObject);
 });
 
 router.get('/projects', function (req, res, next) {
