@@ -86,7 +86,7 @@ router.post('/', function(req, res, next) {
                 knex('uid').where('id', '=', '1').update({
                   value: uid + 1
                 }).then();
-                console.log('Updated UID')
+                console.log('Updated UID');
 
                 // Rename the temp file, move to storage location
                 fs.rename(oldpath, newpath, function(err) {
