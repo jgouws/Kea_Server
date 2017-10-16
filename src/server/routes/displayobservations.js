@@ -5,7 +5,7 @@ const knex = require('../../../src/server/db/knex');
 const indexController = require('../controllers/displayobservations');
 
 router.get('/', function (req, res, next) {
-  
+
   //window.onload.alert("Hi there");
   const renderObject = {};
   renderObject.title = 'Export Data';

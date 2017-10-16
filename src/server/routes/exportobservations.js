@@ -20,24 +20,21 @@ router.get('/', function(req, res, next) {
       csv += ', ' + result[i].latitude + ', ' + result[i].longitude + ', ' + result[i].description;
       csv += '\n';
       //renderObject.rows.push(newRow);
-    }    
+    }
     //res.render('displayobservations', renderObject);
     // Display the contents as plain text
-    res.write(csv);    
+    res.write(csv);
     res.end();
     console.log(req.body.getElementsByClassName);
     res.download('/');
-    
-
   });
 });
 
 router.post('/data', function(req, res, next) {
-  console.log('checks');  
-
+  console.log('checks');
 });
 
-function sendSelected(){
+function sendSelected() {
   dataSelected.data = [];
   var checks = document.getElementsByClassName('kakaRows');
   console.log(checks);

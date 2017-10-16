@@ -1,4 +1,4 @@
-/*funct (req, res, next){} Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
+/*funct (req, res, next) {} Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.
 Middleware functions can perform the following tasks:
 
 Execute any code.
@@ -46,7 +46,7 @@ router.get('/map', function (req, res, next) {
   renderObject.lat = [];
   renderObject.long = [];
   renderObject.latlong = [];
-  console.log("in map");
+  console.log('in map');
   var query = knex.select('*').from('observations').then(function(result) {
     for (var i = 0 ; i < result.length; i++) {
       renderObject.data.push(result[i]);
@@ -54,7 +54,7 @@ router.get('/map', function (req, res, next) {
       renderObject.long.push(result[i].longitude);
       renderObject.latlong.push(result[i].latitude+', '+ result[i].longitude);
       console.log(renderObject.latlong[i]);
-    }    
+    }
   });
   // var wellington = new google.maps.LatLng(-41.2865,174.7762);
   // map = new google.maps.Map(document.getElementById('map'), {
@@ -112,46 +112,47 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
 });
 
 function loadGalleryFilter (req, res, next) {
-  console.log("in loadGalleryFilter");
- galleryObject.filtr = []; 
+  console.log('in loadGalleryFilter');
+  galleryObject.filtr = [];
   var filterQuery = knex.select('*').from('observations').then(function(filterResult) {
     for (var i = 0 ; i < filterResult.length; i++) {
       galleryObject.filtr.push(filterResult[i]);
-    }  
-      return next();
+    }
+    return next();
   });
 }
 
 function loadGallery (req, res, next) {
-  console.log("in loadGallery");
+  console.log('in loadGallery');
   var fromD = req.body.fromDate+' 00:00:00.573';
   var toD = req.body.toDate+' 23:59:59.573';
   var loc = req.body.locations;
   var ob = req.body.obs;
- 
+
   galleryObject.title = 'Gallery';
   galleryObject.data = [];
-  if(fromD == " 00:00:00.573" || toD == " 23:59:59.573" || loc == null || ob == null){
-    console.log("no filter statements");
-    var query = knex.select('*').from('observations').then(function(result) {
+  var query;
+  if (fromD == ' 00:00:00.573' || toD == ' 23:59:59.573' || loc == null || ob == null) {
+    console.log('no filter statements');
+    query = knex.select('*').from('observations').then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
         galleryObject.data.push(result[i]);
       }
       return next();
     });
-  }else{
-    console.log("filterstatements");
-    var query = knex.select('*').from('observations')
+  } else {
+    console.log('filterstatements');
+    query = knex.select('*').from('observations')
     .modify(function() {
-    if(loc != 'All'){
-      this.where({longitude:  loc});
-    }
-    if(ob != "All"){
-      this.where({observation_type: ob});
-    } 
-    if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
-      this.whereBetween('created_at', [fromD, toD]);
-    }
+      if (loc != 'All') {
+        this.where({longitude:  loc});
+      }
+      if (ob != 'All') {
+        this.where({observation_type: ob});
+      }
+      if (fromD != ' 00:00:00.573' && toD != ' 23:59:59.573') {
+        this.whereBetween('created_at', [fromD, toD]);
+      }
     })
     .then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
@@ -164,7 +165,7 @@ function loadGallery (req, res, next) {
 }
 
 function renderGalleryPage (req, res) {
-  console.log("in renderGalleryPage");
+  console.log('in renderGalleryPage');
   res.render('gallery', galleryObject);
 }
 
@@ -172,18 +173,18 @@ router.get('/gallery', loadGalleryFilter, loadGallery,  renderGalleryPage);
 router.post('/gallery', loadGalleryFilter, loadGallery,  renderGalleryPage);
 
 function loadDataFilter (req, res, next) {
-  console.log("in loadDataFilter");
-  dataObject.filtr = []; 
+  console.log('in loadDataFilter');
+  dataObject.filtr = [];
   var filterQuery = knex.select('*').from('observations').then(function(filterResult) {
     for (var i = 0 ; i < filterResult.length; i++) {
       dataObject.filtr.push(filterResult[i]);
-    }  
-      return next();
+    }
+    return next();
   });
 }
 
 function loadData (req, res, next) {
-  console.log("in loadData");
+  console.log('in loadData');
   var fromD = req.body.fromDate+' 00:00:00.573';
   var toD = req.body.toDate+' 23:59:59.573';
   var loc = req.body.locations;
@@ -191,31 +192,31 @@ function loadData (req, res, next) {
 
   dataObject.title = 'Data';
   dataObject.data = [];
-  
-  if(fromD == " 00:00:00.573" || toD == " 23:59:59.573" || loc == null || ob == null){
-    console.log("no filter statements");
-    var query = knex.select('*').from('observations').then(function(result) {
+  var query;
+  if (fromD == ' 00:00:00.573' || toD == ' 23:59:59.573' || loc == null || ob == null) {
+    console.log('no filter statements');
+    query = knex.select('*').from('observations').then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
         dataObject.data.push(result[i]);
       }
       return next();
     });
-  }else{
-    var query = knex.select('*').from('observations')
+  } else {
+    query = knex.select('*').from('observations')
     .modify(function() {
-    if(loc != 'All'){
-      this.where({longitude:  loc});
-    }
-    if(ob != "All"){
-      this.where({observation_type: ob});
-    } 
-    if(fromD != " 00:00:00.573" && toD != " 23:59:59.573"){
-      this.whereBetween('created_at', [fromD, toD]);
-    }
+      if (loc != 'All') {
+        this.where({longitude:  loc});
+      }
+      if (ob != 'All') {
+        this.where({observation_type: ob});
+      }
+      if (fromD != ' 00:00:00.573' && toD != ' 23:59:59.573') {
+        this.whereBetween('created_at', [fromD, toD]);
+      }
     })
     .then(function(result) {
       for (var i = 0 ; i < result.length; i++) {
-        dataObject.data.push(result[i]);        
+        dataObject.data.push(result[i]);
       }
       return next();
     });
@@ -223,7 +224,7 @@ function loadData (req, res, next) {
 }
 
 function renderDataPage (req, res) {
-  console.log("in renderDataPage");
+  console.log('in renderDataPage');
   res.render('data', dataObject);
 }
 
