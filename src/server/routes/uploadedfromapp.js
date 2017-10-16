@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
     fs.readFile(files.fields.path, 'utf8', function(err, data) {
       if (err) throw err;
       //console.log('OK: ' + filename);
-      console.log(data)
+      console.log(data);
       //var lines = data.split(/\r?\n/);
       // check file to make sure it's a image file, only uses file extension
       var filetype = files.filetoupload.type;
