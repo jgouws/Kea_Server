@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
           knex('observations').insert({
             user_id: 1,
             image_url: uid + filename,
-            species: 'bird',
+            observation_type: 'Sighting',
             description: data,
             approved: true,
             latitude: '41.2865',
