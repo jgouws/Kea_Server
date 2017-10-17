@@ -11,10 +11,19 @@ body
 
 .page
   min-height : 100%
-  padding: 0.3%
+  position: relative
   //display: flex
   //flex-direction: column
   //margin-bottom: -42px;
+
+#map
+  height: 100vh
+
+.container.map
+  position: absolute
+  z-index: 9999
+  left: 0
+  right: 0
 
 .main
   .inner-container
@@ -162,6 +171,7 @@ img
   -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
   box-shadow: 0 0 20px 0 rgba(0,0,0,0.2)
   margin-bottom: 40px
+  background-color: #fff
   h3
     background-color: $green
     color: #fff
@@ -171,7 +181,6 @@ img
     font-size: 18px
   .inputs
     padding: 10px
-
 
 #gallery
   .image-container
@@ -225,6 +234,53 @@ img
       input
       span
 
+.uploadform
+  padding: 20px
+  form
+    text-align: center
+    padding: 30px
+    input[type='file']
+      width: 0.1px
+      height: 0.1px
+      opacity: 0
+      overflow: hidden
+      position: absolute
+      z-index: -1
+      + label
+        max-width: 80%
+        font-size: 1.25rem
+        font-weight: 700
+        text-overflow: ellipsis
+        white-space: nowrap
+        cursor: pointer
+        display: inline-block
+        overflow: hidden
+        padding: 20px 30px
+        margin-bottom: 20px
+        background-color: $green
+        color: #fff
+        -webkit-transition: all 0.25s ease-out
+        -moz-transition: all 0.25s ease-out
+        -ms-transition: all 0.25s ease-out
+        -o-transition: all 0.25s ease-out
+        transition: all 0.25s ease-out
+        &:hover
+          background-color: #85ad43
+        &:focus + label, &.has-focus + label
+          outline: 1px dotted #000
+          outline: -webkit-focus-ring-color auto 5px
+        + label
+          svg
+            width: 1em
+            height: 1em
+            vertical-align: middle
+            fill: currentColor
+            margin-top: -0.25em
+            margin-right: 0.25em
+    input[type='text']
+      padding: 6px
+      margin-bottom: 17px
+    input[type='submit']
 
 //Footer
 .foot

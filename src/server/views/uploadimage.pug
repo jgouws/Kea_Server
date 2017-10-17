@@ -1,18 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p  #{title}
-
-  form(action='uploadedimage', method='post', enctype='multipart/form-data')
-    input(type='file', name='filetoupload')
-    br
-    label(for='species') species 
-    br
-    input(type='text', required=true, name='species')
-    br
-    label(for='description') description
-    br
-    input(type='text', required=true, name='description')
-    br
-    input(type='submit')
+  .container.uploadedimage
+    .inner-container
+      .uploadform
+        form(action='uploadedimage', method='post', enctype='multipart/form-data')
+          input#imageupload(type='file', name='filetoupload')
+          label(for='imageupload') 
+            span Choose an image&hellip;
+          br
+          input(type='text', required=true, name='observationtype', placeholder='Observation Type')
+          br
+          input(type='text', required=true, name='description', placeholder='Description')
+          br
+          input(type='submit')
