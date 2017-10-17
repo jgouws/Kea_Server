@@ -5,8 +5,10 @@ const knex = require('../../../src/server/db/knex');
 const indexController = require('../controllers/displayobservations');
 
 router.get('/', function (req, res, next) {
+
+  //window.onload.alert("Hi there");
   const renderObject = {};
-  renderObject.title = 'Welcome to Express! displayobservations';
+  renderObject.title = 'Export Data';
   renderObject.rows = [];
 
   var query = knex.select('*').from('observations').then(function(result) {

@@ -23,9 +23,10 @@ block content
   .container.main
     .inner-container
       include filter-menu
-      
-      mixin row(image, observation, time, location)
-        tr
+      form(method = 'get', action= 'javascript: window.open("\exportobservations", "Download").alert("You can save this data by right-click > save")')
+        button(type='submit') Export to CSV
+      mixin row(image, observation, description, time, location)
+        tr.kakaRows(name='row')
           td.checkbox-cell
             input(type='checkbox')
           td.image-cell
@@ -33,6 +34,8 @@ block content
               img(src=image)
           td.ob-cell
             span= observation
+          td.d-cell
+            span= description
           td.time-cell
             span= time
           td.loc-cell
@@ -43,11 +46,12 @@ block content
           th
           th Image
           th Observation
+          th description
           th Time Taken
           th Location
           
         for dt in data
-          +row(dt.image_url, dt.species, dt.created_at, dt.longitude)
+          +row(dt.image_url, dt.observation_type, dt.description, dt.created_at, dt.longitude)
 
   //-This function will be called when checking each box to change
   //-The corresponding variable
